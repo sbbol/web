@@ -1,0 +1,119 @@
+.page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+  
+  .content {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #edf0f2;
+    padding: 24px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .form input,
+  .form textarea,
+  .form select {
+    width: 100%;
+    min-height: 44px;
+    padding: 0 12px;
+    border: 1px solid #d9dde3;
+    border-radius: 8px;
+  }
+  
+  .form textarea {
+    min-height: 120px;
+    padding-top: 12px;
+  }
+  
+  .tabs {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .tabs button {
+    height: 40px;
+    padding: 0 16px;
+    border: 1px solid #d9dde3;
+    background: white;
+    border-radius: 8px;
+  }
+  
+  .active {
+    background: #008a92;
+    color: white;
+    border-color: #008a92;
+  }
+  
+  .payer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .amount {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  
+  .amount span {
+    font-weight: 600;
+  }
+  
+  .checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .checkbox input {
+    width: auto;
+    min-height: auto;
+  }
+  
+  .linkBtn {
+    width: fit-content;
+    background: none;
+    border: none;
+    color: #008a92;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  
+  .actions {
+    margin-top: 24px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  
+  .actions button {
+    height: 44px;
+    padding: 0 20px;
+  }
+  
+  .primary {
+    background: #008a92;
+    color: white;
+    border: none;
+    border-radius: 8px;
+  }

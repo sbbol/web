@@ -1,0 +1,49 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.4);
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    z-index: 1000;
+  }
+  
+  .modal {
+    width: 700px;
+    max-height: 80vh;
+  
+    overflow-y: auto;
+  
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  
+  .item {
+    height: 56px;
+    border: 1px solid #e6e6e6;
+    border-radius: 8px;
+    background: white;
+    text-align: left;
+    padding: 0 16px;
+    cursor: pointer;
+  }
+  
+  .item:hover {
+    background: #f5f7f9;
+  }

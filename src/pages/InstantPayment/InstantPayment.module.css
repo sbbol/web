@@ -1,0 +1,70 @@
+.page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+  
+  .content {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #edf0f2;
+    padding: 24px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .form input,
+  .form textarea,
+  .form select {
+    width: 100%;
+    min-height: 44px;
+    padding: 0 12px;
+    border: 1px solid #d9dde3;
+    border-radius: 8px;
+  }
+  
+  .form textarea {
+    min-height: 120px;
+    padding-top: 12px;
+  }
+  
+  .row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  
+  .actions {
+    margin-top: 24px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  
+  .actions button {
+    height: 44px;
+    padding: 0 20px;
+  }
+  
+  .primary {
+    background: #008a92;
+    color: white;
+    border: none;
+    border-radius: 8px;
+  }
+  
+  .footer {
+    margin-top: 40px;
+    color: #777;
+    font-size: 14px;
+  }
