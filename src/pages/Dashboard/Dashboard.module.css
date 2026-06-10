@@ -1,0 +1,272 @@
+.dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-bottom: 24px;
+  }
+  
+  /* Баннер */
+  .banner {
+    background: #e0e0e0;
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+  }
+  .bannerInner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .bannerClose {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #666;
+  }
+  .bannerTitle {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .bannerSubtitle {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 16px;
+  }
+  .bannerBtns {
+    display: flex;
+    gap: 12px;
+  }
+  .btnPrimary {
+    background: #107F8C;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .btnSecondary {
+    background: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .bannerImage {
+    width: 120px;
+    height: 80px;
+    background: #ccc;
+    border-radius: 8px;
+  }
+  
+  /* Компания и остатки */
+  .companyBlock {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px 24px;
+  }
+  .companyRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .companyName {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0;
+  }
+  .createDocBtn {
+    background: #107F8C;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .totalBalanceHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    color: #444;
+    cursor: pointer;
+  }
+  .infoIcon {
+    font-size: 14px;
+    color: #999;
+  }
+  .chevron {
+    font-size: 12px;
+    color: #999;
+  }
+  .balanceDetails {
+    margin-top: 12px;
+  }
+  .balanceRow {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .balanceValue {
+    font-weight: 500;
+  }
+  
+  /* Счета */
+  .accountsBlock {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px 24px;
+  }
+  .accountsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .accountsControls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .accountsList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .accountItem {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  .accountCurrency {
+    font-weight: 700;
+    color: #107F8C;
+    width: 40px;
+  }
+  .accountInfo {
+    flex: 1;
+  }
+  .accountNumber {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .accountName {
+    font-size: 12px;
+    color: #888;
+  }
+  .accountRemark {
+    font-size: 11px;
+    color: #aaa;
+    font-style: italic;
+  }
+  .accountBalance {
+    text-align: right;
+    font-weight: 500;
+  }
+  .accountActions {
+    color: #aaa;
+    cursor: pointer;
+  }
+  
+  /* Быстрые ссылки */
+  .quickLinks {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1px;
+    background: #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .quickLinkItem {
+    background: #fff;
+    border: none;
+    padding: 16px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    font-size: 13px;
+    color: #333;
+    transition: background 0.2s;
+  }
+  .quickLinkItem:hover {
+    background: #f5f5f5;
+  }
+  .quickLinkIcon {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+  .quickLinkCount {
+    background: #107F8C;
+    color: #fff;
+    border-radius: 10px;
+    padding: 1px 6px;
+    font-size: 12px;
+  }
+  .quickLinkLabel {
+    margin-top: 4px;
+    text-align: center;
+  }
+  
+  /* Сворачиваемые блоки */
+  .collapsibleBlock {
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px 24px;
+  }
+  .collapsibleHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  .blockIcon {
+    font-size: 20px;
+  }
+  .collapsibleContent {
+    margin-top: 12px;
+  }
+  .chartPlaceholder {
+    height: 150px;
+    background: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    border-radius: 8px;
+    margin-bottom: 12px;
+  }
+  .chartLegend {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+  .legendDot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 4px;
+  }
+  .detailsLink {
+    color: #107F8C;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: right;
+  }

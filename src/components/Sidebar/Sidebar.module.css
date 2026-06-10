@@ -1,0 +1,101 @@
+.sidebar {
+  position: fixed;
+  top: 65px;                         /* высота шапки */
+  left: 0;
+  width: 95px;
+  height: calc(100vh - 65px);        /* на всю оставшуюся высоту */
+  background: #fff;
+  border-right: 1px solid #e0e0e0;
+  overflow-y: auto;                  /* если пунктов много */
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  z-index: 50;
+}
+  
+  /* Навигация — просто колонка */
+  .nav {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Каждый пункт меню */
+  .menuItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;                   /* полностью на ширину панели (95px) */
+    height: 95px;                  /* квадратные по умолчанию */
+    text-decoration: none;
+    color: #888;                   /* серый текст */
+    background: #fff;              /* белый фон в покое */
+    position: relative;
+    font-size: 13px;
+    line-height: 1.2;
+    text-align: center;
+    transition: background 0.15s, color 0.15s;
+    user-select: none;
+    box-sizing: border-box;
+    margin: 0;                     /* убираем любые внешние отступы */
+    padding: 0;
+  }
+  
+  /* Первый пункт выше остальных: 134px */
+  .menuItem:first-child {
+    height: 134px;
+  }
+  
+  /* Иконка */
+  .icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 6px;
+    color: #B2B8BF;                   /* серая в покое */
+    transition: color 0.15s;
+  }
+  
+  /* Текст под иконкой */
+  .label {
+    max-width: 80px;               /* чтобы не вылезал за края */
+    word-wrap: break-word;
+  }
+  
+  /* Разделительная черта снизу */
+  .menuItem::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 32px;
+    height: 1px;
+    background: #ccc;
+  }
+  
+  /* Убираем черту у последнего пункта */
+  .menuItem:last-child::after {
+    display: none;
+  }
+  
+  /* Hover — весь пункт становится серым */
+  .menuItem:hover {
+    background: #f2f2f2;
+    color: #000;
+  }
+  .menuItem:hover .icon {
+    color: #888;                   /* иконка остаётся серой */
+  }
+  
+  /* Active (выбранный) пункт */
+  .menuItem.active {
+    background: #f2f2f2;
+    color: #000;
+  }
+  .menuItem.active .icon {
+    color: #107F8C;                /* бирюзовая иконка */
+  }

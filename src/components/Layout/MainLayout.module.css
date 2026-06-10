@@ -1,0 +1,22 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Основная обёртка контента — смещена вправо, занимает оставшееся место */
+.contentWrapper {
+  margin-left: 95px;                /* ширина сайдбара */
+  margin-top: 65px;                 /* высота шапки */
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: auto;                 /* только эта часть скроллится */
+  background: #f5f5f5;
+}
+
+/* Основной контент страницы */
+.content {
+  flex: 1;
+  padding: 24px 24px 0 24px;
+}

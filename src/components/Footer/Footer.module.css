@@ -1,0 +1,46 @@
+.footer {
+    background: #f0f0f0;
+    border-top: 1px solid #ddd;
+    padding: 24px 0;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 14px;
+    color: #555;
+    padding: 0 24px;           /* чтобы не прилипало к краям */
+  }
+  
+  .copyright {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .link {
+    color: #107F8C;
+    text-decoration: none;
+  }
+  
+  .support {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .phones {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  
+  .policy a {
+    color: #107F8C;
+    text-decoration: none;
+  }
