@@ -236,13 +236,10 @@ const Dashboard = () => {
       {documentModalOpen && (
         <NewDocumentModal
           onClose={() => setDocumentModalOpen(false)}
-          onInstantPayment={() => {
+          onSelect={(docId) => {
             setDocumentModalOpen(false);
-            navigate('/instant-payment');
-          }}
-          onPaymentOrder={() => {
-            setDocumentModalOpen(false);
-            navigate('/payment-order');
+            if (docId === 'instant-payment') navigate('/instant-payment');
+            if (docId === 'payment-order') navigate('/payment-order');
           }}
         />
       )}

@@ -1,50 +1,53 @@
-// pages/Statement/index.tsx
+import styles from './Statement.module.css';
 
-import './Statement.module.css';
+const Statement = () => (
+  <div className={styles.page}>
+    <h1 className={styles.title}>Выписка</h1>
 
-const Statement = () => {
-  return (
-    <div className="statement-page">
-      <h1>Выписка</h1>
-
-      <div className="statement-tabs">
-        <button>ПО СЧЕТАМ</button>
-        <button>ПО КОРПОКАРТАМ</button>
-        <button>РЕЕСТР ОСТАТКОВ</button>
-        <button>ОТЧЕТ</button>
-        <button>ВЫПИСКА ПО РАСПИСАНИЮ</button>
+    <div className={styles.card}>
+      <div className={styles.tabs}>
+        {['ПО СЧЕТАМ', 'ПО КОРПОКАРТАМ', 'РЕЕСТР ОСТАТКОВ', 'ОТЧЕТ', 'ВЫПИСКА ПО РАСПИСАНИЮ'].map((tab, i) => (
+          <button key={tab} type="button" className={`${styles.tab} ${i === 0 ? styles.tabActive : ''}`}>
+            {tab}
+          </button>
+        ))}
       </div>
 
-      <div className="statement-filters">
-        <div>Все валюты • Все счета</div>
-
-        <div className="statement-date">
-          Сегодня
+      <div className={styles.filters}>
+        <div className={styles.filterDropdown}>
+          <span>Все валюты • Все счета</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M4 6L8 10L12 6" stroke="#565B62" strokeWidth="1.5" strokeLinecap="round" />
+          </svg>
         </div>
-
-        <button>Сбросить фильтры</button>
-
-        <label>
-          <input type="checkbox" />
-          Показывать нулевые обороты
-        </label>
-
-        <label>
-          <input type="checkbox" />
-          Показывать выписку за каждый день
-        </label>
-
-        <label>
-          <input type="checkbox" />
-          Показывать переоценку
-        </label>
+        <div className={styles.filterDropdown}>
+          <span>Сегодня</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M4 6L8 10L12 6" stroke="#565B62" strokeWidth="1.5" strokeLinecap="round" />
+          </svg>
+        </div>
+        <button type="button" className={styles.resetLink}>Сбросить фильтры</button>
+        <div className={styles.checkboxes}>
+          <label className={styles.checkbox}>
+            <input type="checkbox" />
+            Показывать нулевые обороты
+          </label>
+          <label className={styles.checkbox}>
+            <input type="checkbox" />
+            Показывать выписку за каждый день
+          </label>
+          <label className={styles.checkbox}>
+            <input type="checkbox" />
+            Показывать переоценку
+          </label>
+        </div>
       </div>
 
-      <button className="statement-submit">
-        Сформировать выписку
-      </button>
+      <div className={styles.actions}>
+        <button type="button" className={styles.submitBtn}>Сформировать выписку</button>
+      </div>
     </div>
-  );
-};
+  </div>
+);
 
 export default Statement;

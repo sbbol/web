@@ -52,6 +52,11 @@
     justify-content: flex-end;
     padding-bottom: 18px;
   }
+
+  /* Продукты и услуги: 112px */
+  .productsItem {
+    height: 112px;
+  }
   
   /* Иконка */
   .icon {

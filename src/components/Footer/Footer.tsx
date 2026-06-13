@@ -12,8 +12,8 @@ const Footer = () => (
         <span className={styles.supportTitle}>Центр клиентской поддержки:</span>
         <div className={styles.phones}>
           <span>+375 17 359-99-11</span>
-          <span>+375 33 348-99-11</span>
           <span>+375 29 359-99-11</span>
+          <span>+375 33 340-99-11</span>
         </div>
       </div>
       <a

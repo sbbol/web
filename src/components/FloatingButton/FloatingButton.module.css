@@ -1,26 +1,131 @@
 .floatingBtn {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-  width: 50px;
-  height: 50px;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9000;
+  width: 56px;
+  height: 56px;
   border: none;
-  border-radius: 50%;
-  background: var(--color-malachite-02);
-  box-shadow: 0 2px 8px rgba(31, 31, 34, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: transparent;
   cursor: pointer;
   padding: 0;
+  filter: drop-shadow(0 4px 12px rgba(31, 31, 34, 0.2));
+  transition: transform 0.2s;
 }
 
 .floatingBtn:hover {
-  background: #0e6f7a;
+  transform: scale(1.05);
 }
 
-.floatingBtn svg {
-  width: 24px;
-  height: 24px;
+.expandedWrap {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9000;
+  width: 360px;
+  max-width: calc(100vw - 48px);
+}
+
+.expandedPanel {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(31, 31, 34, 0.2);
+  overflow: hidden;
+  position: relative;
+}
+
+.expandedClose {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.expandedClose:hover {
+  background: var(--color-asphalt-05);
+}
+
+.expandedContent {
+  padding: 24px 20px 20px;
+}
+
+.expandedAvatar {
+  margin-bottom: 12px;
+}
+
+.expandedTitle {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-graphite-01);
+}
+
+.expandedText {
+  margin: 0 0 16px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-graphite-02);
+}
+
+.expandedTopics {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.topicBtn {
+  padding: 10px 14px;
+  border: 1px solid var(--color-asphalt-03);
+  border-radius: 8px;
+  background: #fff;
+  font-size: 13px;
+  color: var(--color-sky-02);
+  text-align: left;
+  cursor: pointer;
+}
+
+.topicBtn:hover {
+  background: var(--color-asphalt-05);
+}
+
+.expandedInput {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.expandedInput input {
+  flex: 1;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--color-asphalt-03);
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.sendBtn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  background: var(--color-malachite-02);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sendBtn:hover {
+  background: #0e6f7a;
 }

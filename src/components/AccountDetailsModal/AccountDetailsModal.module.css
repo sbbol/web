@@ -1,89 +1,61 @@
-.overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(
-      0,
-      0,
-      0,
-      0.45
-    );
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-  
-  .modal {
-    width: 760px;
-    max-width: calc(100vw - 40px);
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-  }
-  
-  .header {
-    height: 72px;
-    padding: 0 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #edf0f2;
-  }
-  
-  .header h2 {
-    margin: 0;
-    font-size: 24px;
-    font-weight: 600;
-  }
-  
-  .closeBtn {
-    border: none;
-    background: transparent;
-    font-size: 24px;
-    cursor: pointer;
-  }
-  
-  .content {
-    padding: 24px;
-  }
-  
-  .row {
-    display: grid;
-    grid-template-columns: 240px 1fr;
-    gap: 24px;
-    padding: 12px 0;
-    border-bottom: 1px solid #f3f5f7;
-  }
-  
-  .row:last-child {
-    border-bottom: none;
-  }
-  
-  .row span:first-child {
-    color: #687380;
-  }
-  
-  .row span:last-child {
-    font-weight: 500;
-    word-break: break-word;
-  }
-  
-  .actions {
-    padding: 24px;
-    display: flex;
-    gap: 12px;
-    border-top: 1px solid #edf0f2;
-  }
-  
-  .actions button {
-    height: 44px;
-    padding: 0 20px;
-    border-radius: 8px;
-    border: 1px solid #d9dde3;
-    background: white;
-    cursor: pointer;
-  }
-  
-  .actions button:hover {
-    background: #f5f7f9;
-  }
+.content {
+  padding: 8px 24px 24px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--color-asphalt-04);
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-size: 14px;
+  color: var(--color-asphalt-01);
+}
+
+.value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-graphite-01);
+  word-break: break-word;
+}
+
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 44px;
+  padding: 0 20px;
+  border: 1px solid var(--color-asphalt-03);
+  border-radius: 8px;
+  background: #fff;
+  font-size: 14px;
+  color: var(--color-graphite-01);
+  cursor: pointer;
+}
+
+.btnSecondary:hover {
+  background: var(--color-asphalt-05);
+}
+
+.btnPrimary {
+  height: 44px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 8px;
+  background: var(--color-malachite-02);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btnPrimary:hover {
+  background: #0e6f7a;
+}

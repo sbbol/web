@@ -1,57 +1,59 @@
+import Modal from '../Modal';
 import styles from './NewDocumentModal.module.css';
+import { paymentDocuments, cardDocuments, type DocumentTile } from './documentIcons';
 
 interface Props {
   onClose: () => void;
-  onInstantPayment: () => void;
-  onPaymentOrder: () => void;
+  variant?: 'payments' | 'cards';
+  onSelect?: (id: string) => void;
 }
 
-const documents = [
-  'Платежное поручение (BYN) внутри РБ',
-  'Мгновенный платеж (BYN)',
-  'Платеж в ЕРИП (административные процедуры)',
-  'Перевод инвалюты внутри РБ',
-  'Перевод инвалюты за пределы РБ',
-  'Перевод на корпокарту',
-  'Выплаты физическим лицам (по договору с банком)',
-  'Выплаты физическому лицу (без договора с банком)',
-  'Заявка на предоставление продукта (услуги)',
-];
+const DocumentGrid = ({
+  items,
+  onSelect,
+}: {
+  items: DocumentTile[];
+  onSelect?: (id: string) => void;
+}) => (
+  <div className={styles.grid}>
+    {items.map(item => (
+      <button
+        key={item.id}
+        type="button"
+        className={styles.tile}
+        onClick={() => onSelect?.(item.id)}
+      >
+        <span className={styles.iconWrap}>
+          <span className={styles.iconGray}>{item.icon}</span>
+          <span className={styles.iconColor}>{item.coloredIcon}</span>
+        </span>
+        <span className={styles.tileLabel}>
+          {item.label}
+          {item.hasInfo && (
+            <span className={styles.infoIcon} title="Подробнее">?</span>
+          )}
+          {item.hasChevron && (
+            <svg className={styles.chevron} width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 4L10 8L6 12" stroke="#B2B8BF" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          )}
+        </span>
+      </button>
+    ))}
+  </div>
+);
 
 const NewDocumentModal = ({
   onClose,
-  onInstantPayment,
-  onPaymentOrder,
+  variant = 'payments',
+  onSelect,
 }: Props) => {
+  const items = variant === 'cards' ? cardDocuments : paymentDocuments;
+
   return (
-    <div className={styles.overlay}>
-      <div className={styles.modal}>
-        <div className={styles.header}>
-          <h2>Новый документ</h2>
-
-          <button onClick={onClose}>✕</button>
-        </div>
-
-        <div className={styles.list}>
-          {documents.map((doc) => (
-            <button
-              key={doc}
-              className={styles.item}
-              onClick={() => {
-                if (doc.includes('Мгновенный платеж')) {
-                  onInstantPayment();
-                }
-                if (doc.includes('Платежное поручение')) {
-                    onPaymentOrder();
-                  }
-              }}
-            >
-              {doc}
-            </button>
-          ))}
-        </div>
-      </div>
-    </div>
+    <Modal title="Новый документ" onClose={onClose} width={960}>
+      <DocumentGrid items={items} onSelect={onSelect} />
+    </Modal>
   );
 };
 

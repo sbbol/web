@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom';
+import type { ReactNode } from 'react';
 import styles from './Sidebar.module.css';
 
-// SVG-иконки для каждого пункта (взяты из вашего примера)
-const icons: Record<string, JSX.Element> = {
+const icons: Record<string, ReactNode> = {
   dashboard: (
     <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
       <path fill="currentColor" d="M24.22 24.26H10v2.02h12.106v2.62c0 3.152 1.387 4.125 3.942 1.869l9.545-7.88c1.824-1.505 1.885-2.227.122-3.827C28.39 12.47 24.558 9.116 24.22 9v3.19l9.305 8.03c.477.432.465.935-.019 1.335l-9.286 7.786v-5.08z" />
@@ -72,7 +72,7 @@ const Sidebar = () => (
           key={item.path}
           to={item.path}
           className={({ isActive }) =>
-            `${styles.menuItem} ${isActive ? styles.active : ''}`
+            `${styles.menuItem} ${item.icon === 'products' ? styles.productsItem : ''} ${isActive ? styles.active : ''}`
           }
         >
           <span className={styles.icon}>{icons[item.icon]}</span>

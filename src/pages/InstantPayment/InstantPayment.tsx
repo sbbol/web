@@ -1,108 +1,82 @@
+import DocumentFormLayout, { DocMetaSidebar, DocFormFooter } from '../../components/DocumentFormLayout';
 import styles from './InstantPayment.module.css';
 
 interface Props {
-  onClose: () => void;
+  onClose?: () => void;
 }
 
-const InstantPayment = ({
-  onClose,
-}: Props) => {
-  return (
-    <div className={styles.page}>
-      <div className={styles.content}>
-        <div className={styles.header}>
-          <h2>МГНОВЕННЫЙ ПЛАТЕЖ (BYN)</h2>
-
-          <button onClick={onClose}>✕</button>
+const InstantPayment = ({ onClose }: Props) => (
+  <DocumentFormLayout
+    title="МГНОВЕННЫЙ ПЛАТЕЖ (BYN)"
+    onClose={onClose}
+    sidebar={<DocMetaSidebar />}
+    footer={<DocFormFooter />}
+  >
+    <div className={styles.form}>
+      <section className={styles.section}>
+        <h3 className={styles.sectionTitle}>Получатель</h3>
+        <div className={styles.tabs}>
+          <button type="button" className={`${styles.tab} ${styles.tabActive}`}>Из справочника</button>
+          <button type="button" className={styles.tab}>Ввести вручную</button>
         </div>
+        <div className={styles.inputWithIcon}>
+          <input type="text" placeholder="Наименование контрагента или номер счета" />
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M4 7H16M4 7L7 4M4 7L7 10" stroke="#B2B8BF" strokeWidth="1.2" strokeLinecap="round" />
+          </svg>
+        </div>
+      </section>
 
-        <div className={styles.form}>
-          <label>Получатель</label>
-
-          <input
-            placeholder="Наименование контрагента или номер счета"
-          />
-
-          <label>Плательщик</label>
-
-          <input
-            value="DEMO ЮРИДИЧЕСКОЕ ЛИЦО"
-            readOnly
-          />
-
-          <label>Сумма</label>
-
-          <input defaultValue="0.00" />
-
-          <label>Назначение платежа</label>
-
-          <textarea
-            placeholder="Назначение платежа"
-          />
-
-          <label>Код назначения платежа</label>
-
-          <select>
-            <option>
-              Выберите код
-            </option>
+      <section className={styles.section}>
+        <h3 className={styles.sectionTitle}>Плательщик</h3>
+        <label className={styles.field}>
+          <span>Со счета</span>
+          <select defaultValue="acc1">
+            <option value="acc1">BY51 BPSB 3012 2222 2222 2933 2222</option>
           </select>
-
-          <div className={styles.row}>
-            <div>
-              <label>№ документа</label>
-              <input value="6413991" readOnly />
-            </div>
-
-            <div>
-              <label>Дата документа</label>
-              <input
-                value="10.06.2026"
-                readOnly
-              />
-            </div>
-
-            <div>
-              <label>Очередность</label>
-              <input value="21" readOnly />
-            </div>
-          </div>
-
-          <div className={styles.actions}>
-            <button>
-              Сохранить как черновик
-            </button>
-
-            <button>
-              Печатная версия
-            </button>
-
-            <button>
-              Проверить
-            </button>
-
-            <button className={styles.primary}>
-              На подпись
-            </button>
-          </div>
-
-          <div className={styles.footer}>
-            © ОАО «Сбер Банк», 2026
-            <br />
-            www.sber-bank.by
-            <br />
-            Центр клиентской поддержки:
-            <br />
-            +375 17 359-99-11
-            <br />
-            +375 29 359-99-11
-            <br />
-            +375 33 348-99-11
-          </div>
+          <span className={styles.accountSub}>BYN • Текущий (расчетный) счет</span>
+        </label>
+        <div className={styles.orgRow}>
+          <span>DEMO ЮРИДИЧЕСКОЕ ЛИЦО</span>
+          <button type="button" className={styles.linkBtn}>Реквизиты</button>
         </div>
-      </div>
+        <button type="button" className={styles.linkBtn}>+ Указать фактического плательщика ?</button>
+        <label className={styles.field}>
+          <span className={styles.fieldRow}>
+            Сумма
+            <button type="button" className={styles.linkBtnInline}>Указать НДС</button>
+          </span>
+          <input type="text" defaultValue="0.00 BYN" className={styles.amountInput} />
+        </label>
+      </section>
+
+      <section className={styles.section}>
+        <h3 className={styles.sectionTitle}>Назначение платежа</h3>
+        <div className={styles.toggleGroup}>
+          <button type="button" className={`${styles.toggle} ${styles.toggleActive}`}>Прямой платеж</button>
+          <button type="button" className={styles.toggle}>Возврат платежа</button>
+        </div>
+        <label className={styles.field}>
+          <span>Назначение платежа ?</span>
+          <textarea rows={4} />
+        </label>
+        <button type="button" className={styles.linkBtn}>+ Указать документ-основание ?</button>
+        <label className={styles.field}>
+          <span>Категория назначения платежа</span>
+          <select defaultValue="other"><option value="other">Иной платеж</option></select>
+        </label>
+        <label className={styles.field}>
+          <span>Код назначения платежа</span>
+          <div className={styles.inputWithIcon}>
+            <input type="text" placeholder="Выберите код" />
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 7H16M4 7L7 4M4 7L7 10" stroke="#B2B8BF" strokeWidth="1.2" strokeLinecap="round" />
+            </svg>
+          </div>
+        </label>
+      </section>
     </div>
-  );
-};
+  </DocumentFormLayout>
+);
 
 export default InstantPayment;

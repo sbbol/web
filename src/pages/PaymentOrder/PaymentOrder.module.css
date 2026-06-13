@@ -1,119 +1,136 @@
-.page {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 24px;
-  }
-  
-  .content {
-    background: white;
-    border-radius: 12px;
-    border: 1px solid #edf0f2;
-    padding: 24px;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .form input,
-  .form textarea,
-  .form select {
-    width: 100%;
-    min-height: 44px;
-    padding: 0 12px;
-    border: 1px solid #d9dde3;
-    border-radius: 8px;
-  }
-  
-  .form textarea {
-    min-height: 120px;
-    padding-top: 12px;
-  }
-  
-  .tabs {
-    display: flex;
-    gap: 8px;
-  }
-  
-  .tabs button {
-    height: 40px;
-    padding: 0 16px;
-    border: 1px solid #d9dde3;
-    background: white;
-    border-radius: 8px;
-  }
-  
-  .active {
-    background: #008a92;
-    color: white;
-    border-color: #008a92;
-  }
-  
-  .payer {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  
-  .amount {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-  }
-  
-  .amount span {
-    font-weight: 600;
-  }
-  
-  .checkbox {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .checkbox input {
-    width: auto;
-    min-height: auto;
-  }
-  
-  .linkBtn {
-    width: fit-content;
-    background: none;
-    border: none;
-    color: #008a92;
-    cursor: pointer;
-    padding: 0;
-  }
-  
-  .row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-  
-  .actions {
-    margin-top: 24px;
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  
-  .actions button {
-    height: 44px;
-    padding: 0 20px;
-  }
-  
-  .primary {
-    background: #008a92;
-    color: white;
-    border: none;
-    border-radius: 8px;
-  }
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.infoBanner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #e8f4f8;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--color-malachite-02);
+  cursor: pointer;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-graphite-01);
+}
+
+.tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--color-asphalt-04);
+}
+
+.tab {
+  padding: 10px 16px;
+  border: none;
+  background: none;
+  font-size: 14px;
+  color: var(--color-graphite-02);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+
+.tabActive {
+  color: var(--color-malachite-02);
+  border-bottom-color: var(--color-malachite-02);
+  font-weight: 600;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--color-graphite-02);
+}
+
+.field input,
+.field select,
+.field textarea {
+  padding: 10px 12px;
+  border: 1px solid var(--color-asphalt-03);
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.fieldRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inputWithIcon {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-asphalt-03);
+  border-radius: 8px;
+  padding-right: 12px;
+}
+
+.inputWithIcon input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+.orgRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.linkBtn,
+.linkBtnInline {
+  border: none;
+  background: none;
+  color: var(--color-malachite-02);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+
+.amountInput {
+  text-align: right;
+}
+
+.toggleGroup {
+  display: inline-flex;
+  border: 1px solid var(--color-malachite-02);
+  border-radius: 8px;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.toggle {
+  padding: 8px 16px;
+  border: none;
+  background: #fff;
+  color: var(--color-malachite-02);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.toggleActive {
+  background: var(--color-malachite-02);
+  color: #fff;
+}
