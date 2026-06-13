@@ -14,8 +14,8 @@ const MainLayout = () => {
         <main className={styles.content}>
           <Outlet />
         </main>
-        <Footer />
       </div>
+      <Footer />
       <FloatingButton />
     </div>
   );

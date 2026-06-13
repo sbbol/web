@@ -1,323 +1,508 @@
 .dashboard {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 64px;
+  padding-bottom: 32px;
 }
 
+/* Banner — Figma: 1040×272, radius 4px */
 .banner {
   position: relative;
-  background: #e7e7e7;
-  border-radius: 12px;
-  padding: 32px;
-  min-height: 240px;
+  width: 100%;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  line-height: 0;
 }
 
-.bannerContent {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.bannerImage {
+  width: 100%;
+  height: 272px;
+  object-fit: cover;
+  object-position: left center;
+  display: block;
 }
 
 .bannerClose {
   position: absolute;
-  right: 20px;
-  top: 20px;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
   border: none;
   background: transparent;
-  font-size: 24px;
   cursor: pointer;
-}
-
-.bannerTitle {
-  font-size: 48px;
-  line-height: 52px;
-  font-weight: 700;
-  margin: 0;
-}
-
-.bannerSubtitle {
-  margin-top: 24px;
-  color: #444;
-}
-
-.bannerButtons {
+  padding: 0;
   display: flex;
-  gap: 12px;
-  margin-top: 24px;
+  align-items: center;
+  justify-content: center;
 }
 
-.btnPrimary {
-  height: 44px;
-  padding: 0 24px;
-  border: none;
-  border-radius: 8px;
-  background: #008a92;
-  color: white;
-  cursor: pointer;
-}
-
-.btnSecondary {
-  height: 44px;
-  padding: 0 24px;
-  border-radius: 8px;
-  border: 1px solid #d9dde3;
-  background: white;
-  cursor: pointer;
-}
-
-.bannerImage {
-  width: 260px;
-  height: 180px;
-  border-radius: 12px;
-  background: linear-gradient(
-    135deg,
-    #8bb6ff,
-    #b48dff
-  );
-}
-
-.companySection {
+/* Customer info — Figma: gap 16px, padding-bottom 16px */
+.customerInfo {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  padding-bottom: 16px;
 }
 
-.companyHeader {
+.customerRow {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: 64px;
 }
 
-.companyName {
+.customerName {
   margin: 0;
-  font-size: 42px;
+  font-size: 21px;
   font-weight: 600;
+  line-height: 32px;
+  color: var(--color-graphite-01);
+  flex: 1;
 }
 
 .createDocBtn {
-  height: 48px;
   border: none;
-  border-radius: 8px;
-  background: #008a92;
-  color: white;
-  padding: 0 28px;
+  border-radius: var(--radius-md);
+  background: var(--color-malachite-02);
+  color: var(--color-snowy);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  padding: 16px 24px;
   cursor: pointer;
+  white-space: nowrap;
 }
 
-.totalBalanceHeader {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  cursor: pointer;
-}
-
-.infoIcon {
-  color: #8d99a6;
-}
-
-.balanceDetails {
-  max-width: 600px;
+.createDocBtn:hover {
+  background: #0e6f7a;
 }
 
 .balanceRow {
   display: flex;
-  justify-content: space-between;
-  padding: 10px 0;
+  gap: 48px;
+  align-items: flex-start;
 }
 
-.accountsBlock {
-  background: white;
-  border-radius: 12px;
-  border: 1px solid #edf0f2;
+.balanceBlock {
+  width: 201px;
+}
+
+.balanceBlockWide {
+  flex: 1;
+}
+
+.balanceLabelRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.balanceLabel {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-asphalt-01);
+  text-transform: uppercase;
+}
+
+.balanceAmount,
+.foreignAmounts {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.foreignAmounts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 32px;
+}
+
+.amountValue {
+  color: var(--color-graphite-01);
+}
+
+.amountCurrency {
+  color: var(--color-asphalt-01);
+}
+
+/* Middle row: accounts 768px + quick links 240px */
+.middleRow {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.accountsCard {
+  width: 768px;
+  flex-shrink: 0;
+  background: var(--color-snowy);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
 }
 
 .accountsHeader {
+  position: relative;
+  height: 64px;
+  background: var(--color-accounts-header);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 18px;
-  border-bottom: 1px solid #edf0f2;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.accountsHeader::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-asphalt-03);
+}
+
+.accountsTitle {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--color-graphite-01);
 }
 
 .accountsControls {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 20px;
 }
 
-.filterSelect {
+.filterInput {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 220px;
   height: 40px;
   padding: 0 12px;
-  border-radius: 8px;
-  border: 1px solid #d9dde3;
+  background: var(--color-snowy);
+  border: 1px solid var(--color-asphalt-03);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-graphite-01);
 }
 
 .checkboxLabel {
   display: flex;
   align-items: center;
-  gap: 6px;
-  color: #66707a;
-}
-
-.linkBtn,
-.settingsBtn {
-  background: none;
-  border: none;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-graphite-02);
   cursor: pointer;
-  color: #66707a;
+  white-space: nowrap;
 }
 
-.accountItem {
+.checkboxActive {
+  display: flex;
+  width: 24px;
+  height: 24px;
+}
+
+.refreshBtn {
   display: flex;
   align-items: center;
-  min-height: 78px;
-  padding: 0 18px;
-  border-bottom: 1px solid #edf0f2;
+  gap: 4px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-graphite-02);
+  cursor: pointer;
+  white-space: nowrap;
 }
 
-.currencyCircle {
-  width: 42px;
-  height: 42px;
-  border: 2px solid #c9cfd5;
-  border-radius: 50%;
+.settingsBtn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+}
+
+.accountsList {
+  display: flex;
+  flex-direction: column;
+}
+
+.accountRow {
+  position: relative;
+  display: grid;
+  grid-template-columns: 40px 1fr auto 20px;
+  gap: 16px;
+  align-items: center;
+  min-height: 76px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-asphalt-04);
+}
+
+.accountRow:first-child {
+  min-height: 96px;
+}
+
+.accountRow:last-child {
+  border-bottom: none;
+}
+
+.currencyBadge {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.currencyCode {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #687380;
   font-size: 12px;
-  margin-right: 16px;
+  color: var(--color-asphalt-01);
 }
 
 .accountInfo {
-  flex: 1;
+  position: relative;
+  min-width: 0;
+  padding-right: 28px;
 }
 
 .accountNumber {
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-graphite-01);
 }
 
-.accountName {
-  margin-top: 4px;
-  color: #7d8793;
+.accountMeta {
   font-size: 14px;
+  line-height: 20px;
+  color: var(--color-asphalt-01);
+  margin-top: 0;
+}
+
+.hiddenIcon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
 }
 
 .accountBalance {
-  min-width: 150px;
   text-align: right;
-  font-size: 28px;
-  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  white-space: nowrap;
 }
 
-.accountMenu {
-  width: 40px;
-  text-align: center;
-  color: #a4adb6;
-  font-size: 24px;
-}
-
-.quickLinks {
-  display: flex;
-  background: white;
-  border-radius: 12px;
-  border: 1px solid #edf0f2;
-  overflow: hidden;
-}
-
-.quickLink {
-  flex: 1;
-  background: white;
-  border: none;
-  min-height: 92px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  justify-content: center;
+.noInfo {
+  display: inline-flex;
   align-items: center;
+  gap: 4px;
+  color: var(--color-graphite-01);
 }
 
-.quickLink:not(:last-child) {
-  border-right: 1px solid #edf0f2;
-}
-
-.quickLinkIcon {
-  font-size: 22px;
-}
-
-.quickLinkText {
-  text-align: center;
-  white-space: pre-line;
-  font-size: 14px;
-}
-
-.collapseBlock {
-  background: white;
-  border-radius: 12px;
-  border: 1px solid #edf0f2;
-  overflow: hidden;
-}
-
-.collapseHeader {
-  padding: 18px 24px;
-  display: flex;
-  justify-content: space-between;
-  cursor: pointer;
-  font-weight: 500;
-}
-
-.placeholder {
-  padding: 24px;
-  border-top: 1px solid #edf0f2;
-  color: #7d8793;
-}
-
-.accountMenuWrapper {
+.accountMenuWrap {
   position: relative;
 }
 
-.accountMenu {
-  width: 40px;
-  height: 40px;
+.menuBtn {
   border: none;
   background: transparent;
-  font-size: 24px;
   cursor: pointer;
+  padding: 0;
+  display: flex;
 }
 
 .dropdown {
   position: absolute;
+  top: calc(100% + 4px);
   right: 0;
-  top: 44px;
-  width: 180px;
-  background: white;
-  border-radius: 8px;
-  border: 1px solid #edf0f2;
-  box-shadow:
-    0 4px 12px rgba(
-      0,
-      0,
-      0,
-      0.08
-    );
+  min-width: 160px;
+  background: var(--color-snowy);
+  border: 1px solid var(--color-asphalt-04);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
   z-index: 10;
 }
 
 .dropdown button {
+  display: block;
   width: 100%;
-  height: 44px;
+  padding: 10px 16px;
   border: none;
-  background: white;
+  background: var(--color-snowy);
   text-align: left;
-  padding: 0 16px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-graphite-01);
   cursor: pointer;
 }
 
 .dropdown button:hover {
-  background: #f5f7f9;
+  background: var(--color-asphalt-05);
+}
+
+/* Quick links — Figma: 240px column, items 72px */
+.quickLinks {
+  width: 240px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.quickLink {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  height: 72px;
+  padding: 0 0 0 0;
+  border: none;
+  background: var(--color-snowy);
+  cursor: pointer;
+  text-align: left;
+}
+
+.quickLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 60px;
+  right: 0;
+  height: 1px;
+  background: var(--color-asphalt-04);
+}
+
+.quickLink:last-child::after {
+  display: none;
+}
+
+.quickLinkIcon {
+  flex-shrink: 0;
+  margin-left: 0;
+}
+
+.quickLinkLabel {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-graphite-01);
+  padding-right: 8px;
+}
+
+/* Collapsible sections — Figma: 64px header, full width 1040 */
+.collapsible {
+  background: var(--color-snowy);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.collapsibleHeader {
+  width: 100%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px;
+  border: none;
+  background: var(--color-snowy);
+  cursor: pointer;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--color-graphite-01);
+  text-align: left;
+}
+
+.sectionIcon {
+  flex-shrink: 0;
+}
+
+.infoIcon {
+  flex-shrink: 0;
+}
+
+.chevron {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.collapsibleBody {
+  padding: 16px 20px 24px;
+  border-top: 1px solid var(--color-asphalt-04);
+  font-size: 14px;
+  color: var(--color-asphalt-01);
+}
+
+@media (max-width: 1100px) {
+  .middleRow {
+    flex-direction: column;
+  }
+
+  .accountsCard,
+  .quickLinks {
+    width: 100%;
+  }
+
+  .quickLinks {
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 1px solid var(--color-asphalt-04);
+    border-radius: var(--radius-md);
+  }
+
+  .quickLink {
+    width: 50%;
+  }
+
+  .quickLink::after {
+    display: none;
+  }
+
+  .balanceRow {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .customerRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .accountsControls {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .accountsHeader {
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 20px;
+    gap: 12px;
+  }
+
+  .accountRow {
+    grid-template-columns: 40px 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .accountBalance,
+  .accountMenuWrap {
+    grid-column: 2;
+  }
 }

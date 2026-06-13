@@ -1,19 +1,16 @@
 import styles from './FloatingButton.module.css';
 
-const FloatingButton = () => {
-  return (
-    <div className={styles.floatingBtn} title="Чат с банком">
-      <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="25" cy="25" r="25" fill="#107F8C" />
-        <path fillRule="evenodd" clipRule="evenodd"
-          d="M15 15C13.3431 15 12 16.3431 12 18V29C12 30.6569 13.3431 32 15 32H16.5506C16.0541 33.15 15.2597 34.3652 14.0415 35.5402C13.8097 35.7637 14.0733 36.2406 14.3778 36.136C17.1721 35.1763 20.7275 33.882 22.5869 32H36C37.6569 32 39 30.6569 39 29V18C39 16.3431 37.6569 15 36 15H15Z"
-          fill="white" />
-        <circle cx="19.5" cy="23.5" r="1.5" fill="#107F8C" />
-        <circle opacity="0.7" cx="25.5" cy="23.5" r="1.5" fill="#107F8C" />
-        <circle opacity="0.5" cx="31.5" cy="23.5" r="1.5" fill="#107F8C" />
-      </svg>
-    </div>
-  );
-};
+const FloatingButton = () => (
+  <button type="button" className={styles.floatingBtn} title="Чат с банком" aria-label="Чат с банком">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M6 4C4.89543 4 4 4.89543 4 6V14C4 15.1046 4.89543 16 6 16H7.1C6.7 17.05 6.05 18.15 5.1 19.05C4.92 19.22 5.08 19.6 5.32 19.53C7.4 18.85 9.5 17.95 10.9 16.5H18C19.1046 16.5 20 15.6046 20 14.5V6C20 4.89543 19.1046 4 18 4H6Z"
+        fill="white"
+      />
+    </svg>
+  </button>
+);
 
 export default FloatingButton;

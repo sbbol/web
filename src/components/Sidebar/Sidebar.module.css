@@ -1,6 +1,6 @@
 .sidebar {
   position: fixed;
-  top: 65px;                         /* высота шапки */
+  top: var(--header-height);                         /* высота шапки */
   left: 0;
   width: 95px;
   height: calc(100vh - 65px);        /* на всю оставшуюся высоту */
@@ -32,10 +32,11 @@
     width: 100%;                   /* полностью на ширину панели (95px) */
     height: 95px;                  /* квадратные по умолчанию */
     text-decoration: none;
-    color: #888;                   /* серый текст */
+    color: #5e5e5e;                   /* серый текст */
     background: #fff;              /* белый фон в покое */
     position: relative;
     font-size: 13px;
+    font-weight: 600;
     line-height: 1.2;
     text-align: center;
     transition: background 0.15s, color 0.15s;
@@ -48,6 +49,8 @@
   /* Первый пункт выше остальных: 134px */
   .menuItem:first-child {
     height: 134px;
+    justify-content: flex-end;
+    padding-bottom: 18px;
   }
   
   /* Иконка */
@@ -84,8 +87,8 @@
   
   /* Hover — весь пункт становится серым */
   .menuItem:hover {
-    background: #f2f2f2;
-    color: #000;
+    background: var(--color-asphalt-05);
+    color: #1f1f22;
   }
   .menuItem:hover .icon {
     color: #888;                   /* иконка остаётся серой */
@@ -94,7 +97,7 @@
   /* Active (выбранный) пункт */
   .menuItem.active {
     background: #f2f2f2;
-    color: #000;
+    color: #1f1f22;
   }
   .menuItem.active .icon {
     color: #107F8C;                /* бирюзовая иконка */

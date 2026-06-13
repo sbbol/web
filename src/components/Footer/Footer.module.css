@@ -1,46 +1,85 @@
 .footer {
-    background: #f0f0f0;
-    border-top: 1px solid #ddd;
-    padding: 24px 0;
-  }
-  
+  margin-left: var(--sidebar-width);
+  background: var(--color-asphalt-05);
+  padding: 0 72px 32px;
+  margin-top: auto;
+}
+
+.divider {
+  height: 1px;
+  background: var(--color-asphalt-03);
+  margin-bottom: 24px;
+}
+
+.container {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 171px;
+}
+
+.copyright {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  color: var(--color-graphite-01);
+}
+
+.link {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-sky-02);
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.supportTitle {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  color: var(--color-graphite-01);
+}
+
+.phones {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-graphite-01);
+}
+
+.policy {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-sky-02);
+  text-align: right;
+}
+
+@media (max-width: 1100px) {
   .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-    font-size: 14px;
-    color: #555;
-    padding: 0 24px;           /* чтобы не прилипало к краям */
-  }
-  
-  .copyright {
-    display: flex;
     flex-direction: column;
-    gap: 4px;
+    align-items: flex-start;
   }
-  
-  .link {
-    color: #107F8C;
-    text-decoration: none;
+
+  .center {
+    align-items: flex-start;
   }
-  
-  .support {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+
+  .policy {
+    text-align: left;
   }
-  
-  .phones {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  
-  .policy a {
-    color: #107F8C;
-    text-decoration: none;
-  }
+}

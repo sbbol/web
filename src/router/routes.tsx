@@ -1,28 +1,32 @@
 import { lazy } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = lazy(() => import('../pages/Dashboard'));
-const Payments = lazy(() => import('../pages/Dashboard'));
 const Statement = lazy(() => import('../pages/Statement'));
-const Salary = lazy(() => import('../pages/Dashboard'));
-const Products = lazy(() => import('../pages/Dashboard'));
-const Services = lazy(() => import('../pages/Dashboard'));
-const Other = lazy(() => import('../pages/Dashboard'));
-const Settings = lazy(() => import('../pages/Dashboard'));
 const AccountInfo = lazy(() => import('../pages/AccountInfo'));
-const InstantPayment = lazy(() => import('../pages/InstantPayment'));
-const PaymentOrder = lazy(() => import('../pages/PaymentOrder'));
+const InstantPaymentPage = lazy(() => import('../pages/InstantPayment'));
+const PaymentOrderPage = lazy(() => import('../pages/PaymentOrder'));
 
+const InstantPaymentRoute = () => {
+  const navigate = useNavigate();
+  return <InstantPaymentPage onClose={() => navigate('/dashboard')} />;
+};
+
+const PaymentOrderRoute = () => {
+  const navigate = useNavigate();
+  return <PaymentOrderPage onClose={() => navigate('/dashboard')} />;
+};
 
 export const routes = [
   { path: '/dashboard', element: <Dashboard /> },
-  { path: '/payments', element: <Payments /> },
+  { path: '/payments', element: <Dashboard /> },
   { path: '/statement', element: <Statement /> },
-  { path: '/salary', element: <Salary /> },
-  { path: '/products', element: <Products /> },
-  { path: '/services', element: <Services /> },
-  { path: '/other', element: <Other /> },
-  { path: '/settings', element: <Settings /> },
+  { path: '/salary', element: <Dashboard /> },
+  { path: '/products', element: <Dashboard /> },
+  { path: '/services', element: <Dashboard /> },
+  { path: '/other', element: <Dashboard /> },
+  { path: '/settings', element: <Dashboard /> },
   { path: '/account_info/:id', element: <AccountInfo /> },
-  { path: '/instant-payment', element: <InstantPayment /> },
-  { path: '/payment-order', element: <PaymentOrder />, },
+  { path: '/instant-payment', element: <InstantPaymentRoute /> },
+  { path: '/payment-order', element: <PaymentOrderRoute /> },
 ];

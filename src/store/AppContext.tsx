@@ -1,5 +1,3 @@
-// store/AppContext.tsx
-
 import {
   createContext,
   useState,
@@ -13,6 +11,9 @@ export interface Account {
   balance: string;
   currencyCode: string;
   name: string;
+  description?: string;
+  hidden?: boolean;
+  noInfo?: boolean;
 }
 
 interface AppState {
@@ -24,53 +25,53 @@ interface AppState {
   totalBalance: string;
 }
 
-export const AppContext =
-  createContext<AppState>({} as AppState);
+export const AppContext = createContext<AppState>({} as AppState);
 
-export const AppProvider = ({
-  children,
-}: {
-  children: ReactNode;
-}) => {
+export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [state] = useState<AppState>({
     user: {
       name: 'DEMO ЮРИДИЧЕСКОЕ ЛИЦО',
       avatar: '',
     },
-
     accounts: [
       {
         id: '1',
         currency: 'BYN',
-        number:
-          'BY51 BPSB 3012 2222 2222 2933 2222',
-        name: 'Текущий (расчетный) счет',
-        balance: '200.00',
+        number: 'BY15 BPSB 3612 0000 0000 0933 0000',
+        name: 'Текущий счет (расчетный)',
+        description: 'На строительство дороги по договору 4512...',
+        balance: '16 780,00',
         currencyCode: 'BYN',
+        hidden: true,
       },
-
       {
         id: '2',
-        currency: 'BYN',
-        number:
-          'BY69 BPSB 3012 3333 3333 3933 3333',
-        name: 'Карточный счет',
-        balance: '300.00',
-        currencyCode: 'BYN',
+        currency: 'RUB',
+        number: 'BY15 BPSB 3612 0000 0000 0933 0000',
+        name: 'Российские рубли',
+        balance: '12 226 780,00',
+        currencyCode: 'RUB',
       },
-
       {
         id: '3',
-        currency: 'EUR',
-        number:
-          'BY41 BPSB 3012 0000 0000 0978 0000',
-        name: 'Текущий (расчетный) счет',
-        balance: '2 000.00',
-        currencyCode: 'EUR',
+        currency: 'BYN',
+        number: 'BY15 BPSB 3612 0000 0000 0933 0000',
+        name: 'Текущий счет (расчетный)',
+        balance: '',
+        currencyCode: 'BYN',
+        noInfo: true,
+      },
+      {
+        id: '4',
+        currency: 'BYN',
+        number: 'BY15 BPSB 3612 0000 0000 0933 0000',
+        name: 'Специальный счет',
+        balance: '1 999 222 999 226 780,00',
+        currencyCode: 'BYN',
+        hidden: true,
       },
     ],
-
-    totalBalance: '2500.00 BYN',
+    totalBalance: '32 405,00 BYN',
   });
 
   return (
