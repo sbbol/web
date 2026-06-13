@@ -88,8 +88,8 @@ const Dashboard = () => {
             </div>
             <div className={styles.foreignAmounts}>
               <span><span className={styles.amountValue}>1 188 123,00</span><span className={styles.amountCurrency}> RUB</span></span>
-              <span><span className={styles.amountValue}>1 500 000 000,00</span><span className={styles.amountCurrency}> EUR</span></span>
-              <span><span className={styles.amountValue}>2 531,21</span><span className={styles.amountCurrency}> UAH</span></span>
+              <span><span className={styles.amountValue}>12 500,00</span><span className={styles.amountCurrency}> EUR</span></span>
+              <span><span className={styles.amountValue}>134 000,00</span><span className={styles.amountCurrency}> USD</span></span>
             </div>
           </div>
         </div>
