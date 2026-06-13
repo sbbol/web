@@ -24,8 +24,8 @@ const DocumentFormLayout = ({ title, children, onClose, sidebar, footer }: Props
         <div className={styles.cardHeader}>
           <h1 className={styles.title}>{title}</h1>
           <button type="button" className={styles.closeBtn} onClick={handleClose} aria-label="Закрыть">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M6 6L18 18M18 6L6 18" stroke="#B2B8BF" strokeWidth="2" strokeLinecap="round" />
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 4L12 12M12 4L4 12" stroke="#B2B8BF" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
           </button>
         </div>
@@ -43,7 +43,7 @@ export const DocMetaSidebar = () => (
   <div className={styles.metaBox}>
     <label className={styles.metaField}>
       <span>№ документа</span>
-      <input type="text" defaultValue="6414017" readOnly />
+      <input type="text" defaultValue="6414030" readOnly />
     </label>
     <label className={styles.metaField}>
       <span>Дата документа</span>

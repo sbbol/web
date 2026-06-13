@@ -10,7 +10,7 @@ const CorporateCardForm = () => (
       <div className={styles.metaBox}>
         <label className={styles.metaField}>
           <span>№ документа</span>
-          <input type="text" defaultValue="143" />
+          <input type="text" defaultValue="144" />
         </label>
         <label className={styles.metaField}>
           <span>Дата документа</span>
@@ -83,13 +83,26 @@ const CorporateCardForm = () => (
       </fieldset>
 
       <div className={styles.infoBox}>
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <path d="M10 2L12 7H17L13 10L14 15L10 12L6 15L7 10L3 7H8L10 2Z" fill="#107F8C" />
-        </svg>
+        <span className={styles.infoIcon}>i</span>
         <span>При подключении второго и последующих телефонных номеров банк осуществляет информирование о совершенных операциях без ограничения по сумме (за дополнительную плату)</span>
       </div>
+
+      <label className={styles.field}>
+        <span>Мобильный телефон</span>
+        <div className={styles.phoneInput}>
+          <span>🇧🇾</span>
+          <input type="text" placeholder="+375 (__) ___-__-__" />
+          <button type="button" className={styles.phoneDelete} aria-label="Удалить">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 4H13M6 4V3H10V4M5 4V13H11V4" stroke="#B2B8BF" strokeWidth="1.2" strokeLinecap="round" />
+            </svg>
+          </button>
+        </div>
+      </label>
+
       <button type="button" className={styles.linkBtn}>+ Добавить мобильный телефон</button>
 
+      <h3 className={styles.subsection}>Лимиты</h3>
       <label className={styles.checkbox}>
         <input type="checkbox" />
         <span>Уведомлены об установленных ОАО «Сбер Банк» (далее — Банк) лимитах по расходным операциям при использовании корпоративной карты в сутки, которые размещены на сайте Банка (<a href="https://www.sber-bank.by">www.sber-bank.by</a>)</span>

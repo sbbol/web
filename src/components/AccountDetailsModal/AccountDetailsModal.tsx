@@ -9,7 +9,7 @@ interface Props {
 
 const AccountDetailsModal = ({ account, onClose }: Props) => {
   const copyDetails = async () => {
-    const text = `Вид счета: Текущий (расчетный) счет
+    const text = `Вид счета: Карточный счет
 Номер счета: ${account.number}
 Наименование банка: ОАО 'СБЕР БАНК' Г.МИНСК
 БИК банка: BPSBBY2X
@@ -21,8 +21,8 @@ const AccountDetailsModal = ({ account, onClose }: Props) => {
   };
 
   const rows = [
-    { label: 'Вид счета', value: 'Текущий (расчетный) счет' },
-    { label: 'Номер счета', value: account.number },
+    { label: 'Вид счета', value: 'Карточный счет' },
+    { label: 'Номер счета', value: account.number || 'BY69 BPSB 3012 3333 3333 3933 3333' },
     { label: 'Наименование банка', value: "ОАО 'СБЕР БАНК' Г.МИНСК" },
     { label: 'БИК банка', value: 'BPSBBY2X' },
     { label: 'Наименование организации', value: 'DEMO ЮРИДИЧЕСКОЕ ЛИЦО' },
@@ -34,12 +34,17 @@ const AccountDetailsModal = ({ account, onClose }: Props) => {
     <Modal
       title="Реквизиты"
       onClose={onClose}
-      width={760}
+      width={704}
+      height={497.11}
+      bodyHeight={368.11}
+      footerHeight={72}
+      bodyClassName={styles.body}
+      footerClassName={styles.footer}
       footer={
         <>
           <button type="button" className={styles.btnSecondary}>
             Сохранить как
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
               <path d="M3 5L6 8L9 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
           </button>

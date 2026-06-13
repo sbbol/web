@@ -7,8 +7,13 @@ interface ModalProps {
   onClose: () => void;
   children: ReactNode;
   footer?: ReactNode;
-  width?: number | 'full';
+  width?: number;
+  height?: number;
+  bodyHeight?: number;
+  footerHeight?: number;
   className?: string;
+  bodyClassName?: string;
+  footerClassName?: string;
 }
 
 const Modal = ({
@@ -16,8 +21,13 @@ const Modal = ({
   onClose,
   children,
   footer,
-  width = 760,
+  width = 704,
+  height,
+  bodyHeight,
+  footerHeight,
   className,
+  bodyClassName,
+  footerClassName,
 }: ModalProps) => {
   useEffect(() => {
     const prev = document.body.style.overflow;
@@ -30,8 +40,11 @@ const Modal = ({
   return createPortal(
     <div className={styles.overlay} onClick={onClose}>
       <div
-        className={`${styles.modal} ${width === 'full' ? styles.modalFull : ''} ${className ?? ''}`}
-        style={width !== 'full' ? { width: `${width}px` } : undefined}
+        className={`${styles.modal} ${className ?? ''}`}
+        style={{
+          width: `${width}px`,
+          ...(height ? { height: `${height}px` } : {}),
+        }}
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
@@ -42,13 +55,25 @@ const Modal = ({
             {title}
           </h2>
           <button type="button" className={styles.closeBtn} onClick={onClose} aria-label="Закрыть">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
-              <path d="M6 6L18 18M18 6L6 18" stroke="#B2B8BF" strokeWidth="2" strokeLinecap="round" />
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
+              <path d="M4 4L12 12M12 4L4 12" stroke="#B2B8BF" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
           </button>
         </div>
-        <div className={styles.body}>{children}</div>
-        {footer && <div className={styles.footer}>{footer}</div>}
+        <div
+          className={`${styles.body} ${bodyClassName ?? ''}`}
+          style={bodyHeight ? { height: `${bodyHeight}px`, flex: 'none' } : undefined}
+        >
+          {children}
+        </div>
+        {footer && (
+          <div
+            className={`${styles.footer} ${footerClassName ?? ''}`}
+            style={footerHeight ? { height: `${footerHeight}px`, flex: 'none' } : undefined}
+          >
+            {footer}
+          </div>
+        )}
       </div>
     </div>,
     document.body,

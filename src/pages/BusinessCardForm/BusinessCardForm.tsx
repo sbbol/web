@@ -10,7 +10,7 @@ const BusinessCardForm = () => (
       <div className={styles.metaBox}>
         <label className={styles.metaField}>
           <span>№ документа</span>
-          <input type="text" defaultValue="143" />
+          <input type="text" defaultValue="144" />
         </label>
         <label className={styles.metaField}>
           <span>Дата документа</span>

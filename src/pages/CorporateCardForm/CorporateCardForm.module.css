@@ -144,6 +144,29 @@
   color: var(--color-graphite-02);
 }
 
+.infoIcon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ff9900;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.phoneDelete {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+}
+
 .linkBtn {
   border: none;
   background: none;

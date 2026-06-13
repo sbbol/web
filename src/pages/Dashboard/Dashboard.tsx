@@ -183,7 +183,7 @@ const Dashboard = () => {
                           setOpenedMenu(null);
                         }}
                       >
-                        Показать счет
+                        Реквизиты счёта
                       </button>
                     </div>
                   )}

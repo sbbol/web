@@ -1,3 +1,27 @@
+@font-face {
+  font-family: 'SB Sans Interface';
+  src: url('./assets/fonts/SBER FONTS 2026/SBSansInterface/Web/SBSansUI-Regular/SBSansUI-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SB Sans Interface';
+  src: url('./assets/fonts/SBER FONTS 2026/SBSansInterface/Web/SBSansUI-Semibold/SBSansUI-Semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SB Sans Interface';
+  src: url('./assets/fonts/SBER FONTS 2026/SBSansInterface/Web/SBSansUI-Light/SBSansUI-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Figma: СберПоколение 2026 */
   --color-snowy: #ffffff;
@@ -26,6 +50,8 @@
   --shadow-card: 0 1px 3px rgba(31, 31, 34, 0.25);
   --radius-sm: 4px;
   --radius-md: 8px;
+
+  --modal-header-height: 57px;
 
   font-family: var(--font-family);
   font-size: 14px;
@@ -56,4 +82,3 @@ a {
   color: var(--color-sky-02);
   text-decoration: none;
 }
-
