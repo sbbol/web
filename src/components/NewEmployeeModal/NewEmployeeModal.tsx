@@ -21,7 +21,7 @@ interface Props {
 
 const NewEmployeeModal = ({ onClose, onSaved, prefill }: Props) => {
   const fromDale = Boolean(prefill && Object.keys(prefill).length > 0);
-  const { trackField, saveNow } = useDraftTracker({
+  const { trackField, saveNow, completeDraft } = useDraftTracker({
     draftType: 'employee',
     title: 'Новый сотрудник',
     route: '/other',
@@ -45,6 +45,7 @@ const NewEmployeeModal = ({ onClose, onSaved, prefill }: Props) => {
     setError('');
     try {
       await createEmployee({ lastName, firstName, middleName, position, account, phone });
+      await completeDraft();
       onSaved?.();
     } catch {
       setError('Не удалось сохранить сотрудника');

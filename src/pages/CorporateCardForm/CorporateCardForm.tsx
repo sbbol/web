@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DocumentFormLayout, { DocFormFooter } from '../../components/DocumentFormLayout';
+import PrefillBanner from '../../components/PrefillBanner/PrefillBanner';
 import { useDraftTracker } from '../../hooks/useDraftTracker';
+import { useFormPrefill } from '../../hooks/useFormPrefill';
 import styles from './CorporateCardForm.module.css';
 
 const steps = ['Карта', 'Держатель', 'Подтверждения', 'Контакты', 'Итоговый'];
 
 const CorporateCardForm = () => {
-  const { trackField, saveNow } = useDraftTracker({
+  const { fromDale, get } = useFormPrefill('/products/corporate-card-form');
+  const { trackField, saveNow, completeDraft } = useDraftTracker({
     draftType: 'corporate_card_form',
     title: 'Заявление на корпоративную карту',
     route: '/products/corporate-card-form',
@@ -16,6 +19,19 @@ const CorporateCardForm = () => {
   const [contractNumber, setContractNumber] = useState('');
   const [orgName, setOrgName] = useState('DEMO IURIDICHESKOE LITCO');
   const [phone, setPhone] = useState('');
+
+  useEffect(() => {
+    if (fromDale) {
+      const org = get('orgName');
+      const ph = get('phone');
+      const acc = get('account');
+      const contract = get('contractNumber');
+      if (org) { setOrgName(org); trackField('orgName', org); }
+      if (ph) { setPhone(ph); trackField('phone', ph); }
+      if (acc) { setAccount(acc); trackField('account', acc); }
+      if (contract) { setContractNumber(contract); trackField('contractNumber', contract); }
+    }
+  }, [fromDale, get, trackField]);
 
   const handleField = (name: string, value: string) => {
     trackField(name, value);
@@ -36,7 +52,7 @@ const CorporateCardForm = () => {
           </label>
         </div>
       }
-      footer={<DocFormFooter primaryLabel="Продолжить" onSaveDraft={() => saveNow()} />}
+      footer={<DocFormFooter primaryLabel="Продолжить" onSaveDraft={() => saveNow()} onContinue={() => completeDraft()} />}
     >
       <div className={styles.stepper}>
         {steps.map((step, i) => (
@@ -51,6 +67,8 @@ const CorporateCardForm = () => {
       </div>
 
       <div className={styles.form}>
+        <PrefillBanner visible={fromDale} />
+
         <label className={styles.field}>
           <span>Счет, к которому выпускается корпоративная карта</span>
           <select value={account} onChange={e => { setAccount(e.target.value); handleField('account', e.target.value); }}>

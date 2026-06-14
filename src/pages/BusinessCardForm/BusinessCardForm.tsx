@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DocumentFormLayout, { DocFormFooter } from '../../components/DocumentFormLayout';
+import PrefillBanner from '../../components/PrefillBanner/PrefillBanner';
 import { useDraftTracker } from '../../hooks/useDraftTracker';
+import { useFormPrefill } from '../../hooks/useFormPrefill';
 import styles from '../CorporateCardForm/CorporateCardForm.module.css';
 
 const steps = ['Карта', 'Держатель', 'Подтверждения', 'Контакты', 'Итоговый'];
 
 const BusinessCardForm = () => {
-  const { trackField, saveNow } = useDraftTracker({
+  const { fromDale, get } = useFormPrefill('/products/business-card-form');
+  const { trackField, saveNow, completeDraft } = useDraftTracker({
     draftType: 'business_card_form',
     title: 'Заявление на бизнес-карту',
     route: '/products/business-card-form',
@@ -15,6 +18,17 @@ const BusinessCardForm = () => {
   const [account, setAccount] = useState('');
   const [orgName, setOrgName] = useState('DEMO IURIDICHESKOE LITCO');
   const [phone, setPhone] = useState('');
+
+  useEffect(() => {
+    if (fromDale) {
+      const org = get('orgName');
+      const ph = get('phone');
+      const acc = get('account');
+      if (org) { setOrgName(org); trackField('orgName', org); }
+      if (ph) { setPhone(ph); trackField('phone', ph); }
+      if (acc) { setAccount(acc); trackField('account', acc); }
+    }
+  }, [fromDale, get, trackField]);
 
   const handleField = (name: string, value: string) => {
     trackField(name, value);
@@ -35,7 +49,7 @@ const BusinessCardForm = () => {
           </label>
         </div>
       }
-      footer={<DocFormFooter primaryLabel="Продолжить" onSaveDraft={() => saveNow()} />}
+      footer={<DocFormFooter primaryLabel="Продолжить" onSaveDraft={() => saveNow()} onContinue={() => completeDraft()} />}
     >
       <div className={styles.stepper}>
         {steps.map((step, i) => (
@@ -50,6 +64,8 @@ const BusinessCardForm = () => {
       </div>
 
       <div className={styles.form}>
+        <PrefillBanner visible={fromDale} />
+
         <label className={styles.field}>
           <span>Счет, к которому выпускается бизнес-карта</span>
           <select value={account} onChange={e => { setAccount(e.target.value); handleField('account', e.target.value); }}>

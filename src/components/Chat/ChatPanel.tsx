@@ -6,11 +6,14 @@ import DraftSuggestion from './DraftSuggestion';
 import { navigateWithPrefill } from '../../utils/deepLinks';
 import type { Draft } from '../../types/chat';
 import styles from './ChatPanel.module.css';
+
 const SUGGESTED_TOPICS = [
   'Как создать платёж?',
   'Как получить выписку?',
   'Как добавить сотрудника?',
 ];
+
+const OPERATOR_PANEL_URL = 'http://localhost:8000/operator.html';
 
 const ChatPanel = () => {
   const {
@@ -18,9 +21,12 @@ const ChatPanel = () => {
     isLoading,
     statusText,
     drafts,
+    isEscalated,
     sendMessage,
     stopGeneration,
     setIsOpen,
+    dismissDraft,
+    startNewConversation,
   } = useChat();
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -51,7 +57,7 @@ const ChatPanel = () => {
   const hasMessages = messages.length > 0;
 
   return (
-    <div className={styles.panel}>
+    <div className={styles.panel} data-chat-panel>
       <button type="button" className={styles.close} onClick={() => setIsOpen(false)} aria-label="Закрыть">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
           <path d="M5 5L15 15M15 5L5 15" stroke="#B2B8BF" strokeWidth="2" strokeLinecap="round" />
@@ -66,11 +72,25 @@ const ChatPanel = () => {
             <circle cx="24" cy="18" r="6" fill="white" />
           </svg>
         </div>
-        <div>
+        <div className={styles.headerText}>
           <h3 className={styles.title}>Дэйл</h3>
           <p className={styles.subtitle}>AI-помощник СберБизнес</p>
         </div>
+        {hasMessages && (
+          <button type="button" className={styles.newChatBtn} onClick={startNewConversation}>
+            Начать заново
+          </button>
+        )}
       </div>
+
+      {isEscalated && (
+        <div className={styles.escalationBanner}>
+          Диалог передан оператору — ожидайте ответа. Вы можете продолжать писать сюда.
+          <a href={OPERATOR_PANEL_URL} target="_blank" rel="noopener noreferrer" className={styles.operatorLink}>
+            Панель оператора
+          </a>
+        </div>
+      )}
 
       <div className={styles.messages}>
         {!hasMessages && (
@@ -78,7 +98,11 @@ const ChatPanel = () => {
             <p className={styles.greeting}>
               Здравствуйте! Я Дэйл — ваш помощник в СберБизнес. Задайте вопрос или выберите тему.
             </p>
-            <DraftSuggestion drafts={drafts} onContinue={handleDraftContinue} />
+            <DraftSuggestion
+              drafts={drafts}
+              onContinue={handleDraftContinue}
+              onDismiss={draft => dismissDraft(draft.id)}
+            />
             <div className={styles.topics}>
               {SUGGESTED_TOPICS.map(topic => (
                 <button
@@ -109,7 +133,7 @@ const ChatPanel = () => {
       <form className={styles.inputArea} onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Введите сообщение..."
+          placeholder={isEscalated ? 'Сообщение оператору…' : 'Введите сообщение...'}
           value={input}
           onChange={e => setInput(e.target.value)}
           disabled={isLoading}

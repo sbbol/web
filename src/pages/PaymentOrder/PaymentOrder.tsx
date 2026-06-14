@@ -11,7 +11,7 @@ interface Props {
 
 const PaymentOrder = ({ onClose }: Props) => {
   const { fromDale, get, bind } = useFormPrefill('/payment-order');
-  const { trackField, saveNow } = useDraftTracker({
+  const { trackField, saveNow, completeDraft } = useDraftTracker({
     draftType: 'payment_order',
     title: 'Платёжное поручение',
     route: '/payment-order',
@@ -33,7 +33,7 @@ const PaymentOrder = ({ onClose }: Props) => {
       title="ПЛАТЕЖНОЕ ПОРУЧЕНИЕ (BYN) ВНУТРИ РБ"
       onClose={onClose}
       sidebar={<DocMetaSidebar />}
-      footer={<DocFormFooter onSaveDraft={() => saveNow()} />}
+      footer={<DocFormFooter onSaveDraft={() => saveNow()} onContinue={() => completeDraft()} />}
     >
       <div className={styles.form}>
         <PrefillBanner visible={fromDale} />

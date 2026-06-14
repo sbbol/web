@@ -12,9 +12,24 @@ export function useTextSelection() {
   const [explanation, setExplanation] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleMouseUp = useCallback(async () => {
+  const handleMouseUp = useCallback(async (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (
+      target.closest('input, textarea, select, [contenteditable="true"]') ||
+      target.closest('[data-chat-panel]')
+    ) {
+      return;
+    }
+
     const sel = window.getSelection();
     if (!sel || sel.isCollapsed || !sel.toString().trim()) {
+      return;
+    }
+
+    const anchor = sel.anchorNode?.parentElement;
+    if (
+      anchor?.closest('input, textarea, select, [contenteditable="true"], [data-chat-panel]')
+    ) {
       return;
     }
 

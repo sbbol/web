@@ -11,7 +11,7 @@ interface Props {
 
 const InstantPayment = ({ onClose }: Props) => {
   const { fromDale, get, bind } = useFormPrefill('/instant-payment');
-  const { trackField, saveNow } = useDraftTracker({
+  const { trackField, saveNow, completeDraft } = useDraftTracker({
     draftType: 'instant_payment',
     title: 'Мгновенный платёж',
     route: '/instant-payment',
@@ -33,7 +33,7 @@ const InstantPayment = ({ onClose }: Props) => {
       title="МГНОВЕННЫЙ ПЛАТЕЖ (BYN)"
       onClose={onClose}
       sidebar={<DocMetaSidebar />}
-      footer={<DocFormFooter onSaveDraft={() => saveNow()} />}
+      footer={<DocFormFooter onSaveDraft={() => saveNow()} onContinue={() => completeDraft()} />}
     >
       <div className={styles.form}>
         <PrefillBanner visible={fromDale} />

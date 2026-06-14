@@ -13,12 +13,26 @@
   color: #f57f17;
 }
 
+.btn:hover {
+  background: var(--color-asphalt-05);
+}
+
+.row {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.row:last-child {
+  margin-bottom: 0;
+}
+
 .btn {
+  flex: 1;
   display: block;
-  width: 100%;
   text-align: left;
   padding: 8px 10px;
-  margin-bottom: 4px;
   border: 1px solid var(--color-asphalt-03);
   border-radius: 6px;
   background: white;
@@ -27,10 +41,19 @@
   cursor: pointer;
 }
 
-.btn:hover {
-  background: var(--color-asphalt-05);
+.dismissBtn {
+  width: 32px;
+  flex-shrink: 0;
+  border: 1px solid var(--color-asphalt-03);
+  border-radius: 6px;
+  background: white;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--color-graphite-03);
+  cursor: pointer;
 }
 
-.btn:last-child {
-  margin-bottom: 0;
+.dismissBtn:hover {
+  background: #ffebee;
+  color: #c62828;
 }

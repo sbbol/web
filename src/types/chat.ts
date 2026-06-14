@@ -25,7 +25,7 @@ export interface Draft {
 }
 
 export interface ChatStreamEvent {
-  type: 'meta' | 'status' | 'token' | 'action';
+  type: 'meta' | 'status' | 'token' | 'action' | 'replace';
   text?: string;
   conversation_id?: string;
   action?: ChatAction;
@@ -36,4 +36,9 @@ export interface ServerMessage {
   role: 'user' | 'assistant' | 'operator';
   content: string;
   created_at: string;
+  metadata?: {
+    actions?: ChatAction[];
+    escalated?: boolean;
+    system?: boolean;
+  };
 }

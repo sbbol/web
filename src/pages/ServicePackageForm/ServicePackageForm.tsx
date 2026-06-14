@@ -1,12 +1,15 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import DocumentFormLayout, { DocFormFooter } from '../../components/DocumentFormLayout';
+import PrefillBanner from '../../components/PrefillBanner/PrefillBanner';
 import { useDraftTracker } from '../../hooks/useDraftTracker';
+import { useFormPrefill } from '../../hooks/useFormPrefill';
 import { AppContext } from '../../store/AppContext';
 import styles from './ServicePackageForm.module.css';
 
 const ServicePackageForm = () => {
   const { user, accounts } = useContext(AppContext);
-  const { trackField, saveNow } = useDraftTracker({
+  const { fromDale, get } = useFormPrefill('/products/service-package-form');
+  const { trackField, saveNow, completeDraft } = useDraftTracker({
     draftType: 'service_package_form',
     title: 'Извещение о смене пакета услуг',
     route: '/products/service-package-form',
@@ -15,6 +18,17 @@ const ServicePackageForm = () => {
   const [priorityAccount, setPriorityAccount] = useState(accounts[0]?.id || '');
   const [directorName, setDirectorName] = useState('');
   const [directorPosition, setDirectorPosition] = useState('');
+
+  useEffect(() => {
+    if (fromDale) {
+      const name = get('directorName');
+      const position = get('directorPosition');
+      const acc = get('priorityAccount');
+      if (name) { setDirectorName(name); trackField('directorName', name); }
+      if (position) { setDirectorPosition(position); trackField('directorPosition', position); }
+      if (acc) { setPriorityAccount(acc); trackField('priorityAccount', acc); }
+    }
+  }, [fromDale, get, trackField]);
 
   const handleField = (name: string, value: string) => {
     trackField(name, value);
@@ -35,9 +49,10 @@ const ServicePackageForm = () => {
           </label>
         </div>
       }
-      footer={<DocFormFooter onSaveDraft={() => saveNow()} />}
+      footer={<DocFormFooter onSaveDraft={() => saveNow()} onContinue={() => completeDraft()} />}
     >
       <div className={styles.form}>
+        <PrefillBanner visible={fromDale} />
         <div className={styles.orgName}>{user?.name || ''}</div>
 
         <div className={styles.packageBox}>

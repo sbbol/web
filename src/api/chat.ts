@@ -50,6 +50,7 @@ export async function* streamChat(
 
 export async function fetchDrafts(): Promise<Draft[]> {
   const res = await fetch(`${API_BASE}/drafts?user_id=${USER_ID}`);
+  if (!res.ok) throw new Error(`Drafts error: ${res.status}`);
   const data = await res.json();
   return data.drafts || [];
 }
@@ -71,7 +72,8 @@ export async function saveDraft(draft: {
 }
 
 export async function deleteDraft(draftId: string): Promise<void> {
-  await fetch(`${API_BASE}/drafts/${draftId}?user_id=${USER_ID}`, { method: 'DELETE' });
+  const res = await fetch(`${API_BASE}/drafts/${draftId}?user_id=${USER_ID}`, { method: 'DELETE' });
+  if (!res.ok) throw new Error(`Delete draft error: ${res.status}`);
 }
 
 export async function fetchChatHistory(conversationId: string): Promise<{
@@ -79,5 +81,6 @@ export async function fetchChatHistory(conversationId: string): Promise<{
   escalated: boolean;
 }> {
   const res = await fetch(`${API_BASE}/chat/history/${conversationId}?user_id=${USER_ID}`);
+  if (!res.ok) throw new Error(`History error: ${res.status}`);
   return res.json();
 }

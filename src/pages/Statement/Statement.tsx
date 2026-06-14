@@ -27,7 +27,7 @@ const Statement = () => {
   const [searchParams] = useSearchParams();
   const { fromDale, get, setValues } = useFormPrefill('/statement');
 
-  const { trackField } = useDraftTracker({
+  const { trackField, completeDraft } = useDraftTracker({
 
     draftType: 'statement',
 
@@ -160,6 +160,7 @@ const Statement = () => {
       });
 
       setResult(data);
+      await completeDraft();
 
     } catch {
 
