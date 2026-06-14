@@ -3,13 +3,14 @@ import Header from '../Header';
 import Sidebar from '../Sidebar';
 import Footer from '../Footer';
 import FloatingButton from '../FloatingButton';
+import ExplainTooltip from '../LanguageAdapter/ExplainTooltip';
 import styles from './MainLayout.module.css';
 
 const MainLayout = () => {
   return (
     <div className={styles.layout}>
       <Header />
-      <Sidebar />                     {/* фиксированный сайдбар */}
+      <Sidebar />
       <div className={styles.contentWrapper}>
         <main className={styles.content}>
           <Outlet />
@@ -17,6 +18,7 @@ const MainLayout = () => {
       </div>
       <Footer />
       <FloatingButton />
+      <ExplainTooltip />
     </div>
   );
 };

@@ -64,12 +64,14 @@ export const DocMetaSidebar = () => (
 export const DocFormFooter = ({
   primaryLabel = 'На подпись',
   onContinue,
+  onSaveDraft,
 }: {
   primaryLabel?: string;
   onContinue?: () => void;
+  onSaveDraft?: () => void;
 }) => (
   <>
-    <button type="button" className={styles.draftLink}>Сохранить как черновик</button>
+    <button type="button" className={styles.draftLink} onClick={onSaveDraft}>Сохранить как черновик</button>
     <div className={styles.footerActions}>
       <button type="button" className={styles.btnOutline}>Печатная версия</button>
       <button type="button" className={styles.btnOutline}>Проверить</button>

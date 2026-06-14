@@ -15,6 +15,7 @@ interface Props {
   items?: DocumentListItem[];
   emptyText?: string;
   children?: ReactNode;
+  onItemClick?: (item: DocumentListItem) => void;
 }
 
 const DocumentListPage = ({
@@ -23,6 +24,7 @@ const DocumentListPage = ({
   items = [],
   emptyText = 'Документы отсутствуют',
   children,
+  onItemClick,
 }: Props) => (
   <div className={styles.page}>
     <div className={styles.header}>
@@ -60,7 +62,14 @@ const DocumentListPage = ({
             <span />
           </div>
           {items.map(item => (
-            <div key={item.id} className={styles.tableRow}>
+            <div
+              key={item.id}
+              className={styles.tableRow}
+              role={onItemClick ? 'button' : undefined}
+              tabIndex={onItemClick ? 0 : undefined}
+              onClick={onItemClick ? () => onItemClick(item) : undefined}
+              onKeyDown={onItemClick ? (e) => { if (e.key === 'Enter') onItemClick(item); } : undefined}
+            >
               <span className={styles.docNumber}>{item.number}</span>
               <span>{item.date}</span>
               <span className={`${styles.status} ${styles[`status_${item.statusType ?? 'draft'}`]}`}>

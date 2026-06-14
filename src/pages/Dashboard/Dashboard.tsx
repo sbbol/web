@@ -37,7 +37,7 @@ const CurrencyBadge = ({ code }: { code: string }) => (
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { user, accounts } = useContext(AppContext);
+  const { user, accounts, totalBalance } = useContext(AppContext);
 
   const [bannerVisible, setBannerVisible] = useState(true);
   const [analyticsExpanded, setAnalyticsExpanded] = useState(false);
@@ -78,7 +78,7 @@ const Dashboard = () => {
           <div className={styles.balanceBlock}>
             <div className={styles.balanceLabel}>ВСЕГО ДОСТУПНО НА BYN СЧЕТАХ</div>
             <div className={styles.balanceAmount}>
-              <span className={styles.amountValue}>32 405,00</span>
+              <span className={styles.amountValue}>{totalBalance.replace(' BYN', '') || '—'}</span>
               <span className={styles.amountCurrency}> BYN</span>
             </div>
           </div>
@@ -87,9 +87,12 @@ const Dashboard = () => {
               <span className={styles.balanceLabel}>НА СЧЕТАХ В ДРУГИХ ВАЛЮТАХ</span>
             </div>
             <div className={styles.foreignAmounts}>
-              <span><span className={styles.amountValue}>1 188 123,00</span><span className={styles.amountCurrency}> RUB</span></span>
-              <span><span className={styles.amountValue}>12 500,00</span><span className={styles.amountCurrency}> EUR</span></span>
-              <span><span className={styles.amountValue}>134 000,00</span><span className={styles.amountCurrency}> USD</span></span>
+              {accounts.filter(a => a.currency !== 'BYN' && !a.noInfo && a.balance).map(a => (
+                <span key={a.id}>
+                  <span className={styles.amountValue}>{a.balance}</span>
+                  <span className={styles.amountCurrency}> {a.currency}</span>
+                </span>
+              ))}
             </div>
           </div>
         </div>
@@ -175,7 +178,15 @@ const Dashboard = () => {
                       <button type="button" onClick={() => navigate(`/account_info/${acc.id}`)}>
                         Просмотреть
                       </button>
-                      <button type="button">Выписка</button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setOpenedMenu(null);
+                          navigate(`/statement?account=${acc.id}`);
+                        }}
+                      >
+                        Выписка
+                      </button>
                       <button
                         type="button"
                         onClick={() => {

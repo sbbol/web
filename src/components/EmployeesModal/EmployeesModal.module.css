@@ -156,13 +156,29 @@
 }
 
 .colActions {
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  padding: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.deleteBtn {
+  border: none;
+  background: none;
+  color: var(--color-sky-02, #107F8C);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.deleteBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.loading {
+  padding: 24px;
+  text-align: center;
+  color: var(--color-graphite-02);
 }
 
 .footerText {

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import EmployeesModal from '../../components/EmployeesModal';
 import styles from './Other.module.css';
 
@@ -10,6 +11,15 @@ const otherItems = [
 
 const Other = () => {
   const [employeesOpen, setEmployeesOpen] = useState(false);
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.get('open') === 'employees') {
+      setEmployeesOpen(true);
+    }
+  }, [searchParams]);
+
+  const autoOpenNew = searchParams.get('newEmployee') === 'true';
 
   return (
     <>
@@ -36,7 +46,12 @@ const Other = () => {
           ))}
         </div>
       </div>
-      {employeesOpen && <EmployeesModal onClose={() => setEmployeesOpen(false)} />}
+      {employeesOpen && (
+        <EmployeesModal
+          onClose={() => setEmployeesOpen(false)}
+          autoOpenNew={autoOpenNew}
+        />
+      )}
     </>
   );
 };
