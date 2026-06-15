@@ -1,0 +1,65 @@
+.form {
+  flex-shrink: 0;
+  padding: 12px 20px 20px;
+}
+
+.formChat {
+  padding: 8px 16px 16px;
+}
+
+.inputWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  height: 48px;
+  padding: 0 52px 0 16px;
+  border: 1px solid var(--color-asphalt-03);
+  border-radius: 24px;
+  background: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--color-graphite-01);
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--color-asphalt-02);
+}
+
+.input:focus {
+  border-color: var(--color-malachite-03);
+}
+
+.input:disabled {
+  background: var(--color-asphalt-05);
+}
+
+.micBtn {
+  position: absolute;
+  right: 6px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-malachite-02);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.micBtn:hover:not(:disabled) {
+  background: #0e6f7a;
+}
+
+.micBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

@@ -71,9 +71,10 @@ export function useTextSelection() {
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (!target.closest('[data-explain-tooltip]')) {
-        if (selection) dismiss();
+      if (target.closest('[data-explain-tooltip]') || target.closest('[data-chat-panel]')) {
+        return;
       }
+      if (selection) dismiss();
     };
     document.addEventListener('mousedown', handleClick);
     return () => document.removeEventListener('mousedown', handleClick);

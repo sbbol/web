@@ -1,17 +1,14 @@
-import { useRef, useEffect, useState, type FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRef, useEffect, useState } from 'react';
 import { useChat } from '../../store/ChatContext';
 import MessageBubble from './MessageBubble';
-import DraftSuggestion from './DraftSuggestion';
-import { navigateWithPrefill } from '../../utils/deepLinks';
-import type { Draft } from '../../types/chat';
+import WelcomeScreen from './WelcomeScreen';
+import ChatMenu from './ChatMenu';
+import ChatInput from './ChatInput';
+import { QUICK_ACTIONS } from './chatConstants';
+import avatarImage from '../../assets/floating-button-avatar.png';
+import iconClose from '../../assets/figma/icon-close.svg';
+import iconMenuVertical from '../../assets/figma/chat/icon-menu-vertical.svg';
 import styles from './ChatPanel.module.css';
-
-const SUGGESTED_TOPICS = [
-  'Как создать платёж?',
-  'Как получить выписку?',
-  'Как добавить сотрудника?',
-];
 
 const OPERATOR_PANEL_URL = 'http://localhost:8000/operator.html';
 
@@ -25,138 +22,161 @@ const ChatPanel = () => {
     sendMessage,
     stopGeneration,
     setIsOpen,
-    dismissDraft,
     startNewConversation,
   } = useChat();
   const [input, setInput] = useState('');
+  const [menuOpen, setMenuOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
+
+  const hasMessages = messages.length > 0;
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, statusText]);
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     if (!input.trim()) return;
     sendMessage(input);
     setInput('');
   };
 
-  const handleDraftContinue = (draft: Draft) => {
-    setIsOpen(false);
-    navigateWithPrefill(navigate, {
-      type: 'navigate',
-      route: draft.route,
-      label: draft.title,
-      params: { prefill: 'true' },
-      form_data: draft.form_data || {},
-    });
+  const handleQueryClick = (query: string) => {
+    sendMessage(query);
   };
 
-  const hasMessages = messages.length > 0;
+  const handleContactSupport = () => {
+    setMenuOpen(false);
+    sendMessage('Связаться с поддержкой');
+  };
+
+  const handleClearChat = () => {
+    setMenuOpen(false);
+    startNewConversation();
+    setInput('');
+  };
+
+  const handleQuickAction = (query: string) => {
+    sendMessage(query);
+  };
+
+  const inputPlaceholder = isEscalated
+    ? 'Сообщение оператору…'
+    : hasMessages
+      ? 'Спросите или скажите, что сделать...'
+      : 'Спросите или скажите, что нужно сделать...';
 
   return (
     <div className={styles.panel} data-chat-panel>
-      <button type="button" className={styles.close} onClick={() => setIsOpen(false)} aria-label="Закрыть">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <path d="M5 5L15 15M15 5L5 15" stroke="#B2B8BF" strokeWidth="2" strokeLinecap="round" />
-        </svg>
-      </button>
-
-      <div className={styles.header}>
-        <div className={styles.avatar}>
-          <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
-            <circle cx="24" cy="24" r="24" fill="#107F8C" />
-            <path d="M14 32C14 27.5817 17.5817 24 22 24H26C30.4183 24 34 27.5817 34 32V34H14V32Z" fill="white" />
-            <circle cx="24" cy="18" r="6" fill="white" />
-          </svg>
-        </div>
-        <div className={styles.headerText}>
-          <h3 className={styles.title}>Дэйл</h3>
-          <p className={styles.subtitle}>AI-помощник СберБизнес</p>
-        </div>
-        {hasMessages && (
-          <button type="button" className={styles.newChatBtn} onClick={startNewConversation}>
-            Начать заново
-          </button>
-        )}
-      </div>
-
-      {isEscalated && (
-        <div className={styles.escalationBanner}>
-          Диалог передан оператору — ожидайте ответа. Вы можете продолжать писать сюда.
-          <a href={OPERATOR_PANEL_URL} target="_blank" rel="noopener noreferrer" className={styles.operatorLink}>
-            Панель оператора
-          </a>
-        </div>
-      )}
-
-      <div className={styles.messages}>
-        {!hasMessages && (
-          <>
-            <p className={styles.greeting}>
-              Здравствуйте! Я Дэйл — ваш помощник в СберБизнес. Задайте вопрос или выберите тему.
-            </p>
-            <DraftSuggestion
-              drafts={drafts}
-              onContinue={handleDraftContinue}
-              onDismiss={draft => dismissDraft(draft.id)}
+      {hasMessages ? (
+        <>
+          <div className={styles.chatHeader}>
+            <div className={styles.chatHeaderControls}>
+              <button
+                type="button"
+                className={styles.menuBtn}
+                onClick={() => setMenuOpen(prev => !prev)}
+                aria-label="Меню"
+                aria-expanded={menuOpen}
+              >
+                <img src={iconMenuVertical} alt="" width={20} height={20} aria-hidden />
+              </button>
+              <button
+                type="button"
+                className={styles.closeBtn}
+                onClick={() => setIsOpen(false)}
+                aria-label="Закрыть"
+              >
+                <img src={iconClose} alt="" width={36} height={36} aria-hidden />
+              </button>
+            </div>
+            <ChatMenu
+              isOpen={menuOpen}
+              onClose={() => setMenuOpen(false)}
+              onContactSupport={handleContactSupport}
+              onClearChat={handleClearChat}
             />
-            <div className={styles.topics}>
-              {SUGGESTED_TOPICS.map(topic => (
+            <div className={styles.badge}>
+              <img src={avatarImage} alt="" className={styles.badgeAvatar} aria-hidden />
+              <span className={styles.badgeText}>AI-помощник</span>
+            </div>
+            <div className={styles.dateSep}>
+              <span className={styles.dateLine} />
+              <span className={styles.dateText}>Сегодня</span>
+              <span className={styles.dateLine} />
+            </div>
+          </div>
+
+          {isEscalated && (
+            <div className={styles.escalationBanner}>
+              Диалог передан оператору — ожидайте ответа.
+              <a href={OPERATOR_PANEL_URL} target="_blank" rel="noopener noreferrer" className={styles.operatorLink}>
+                Панель оператора
+              </a>
+            </div>
+          )}
+
+          <div className={styles.messages}>
+            {messages.map(msg => (
+              <MessageBubble key={msg.id} message={msg} />
+            ))}
+
+            {isLoading && statusText && (
+              <div className={styles.status}>{statusText}</div>
+            )}
+
+            <div ref={messagesEndRef} />
+          </div>
+
+          <div className={styles.footer}>
+            <div className={styles.quickActions}>
+              {QUICK_ACTIONS.map(action => (
                 <button
-                  key={topic}
+                  key={action.id}
                   type="button"
-                  className={styles.topicBtn}
-                  onClick={() => sendMessage(topic)}
+                  className={styles.quickBtn}
+                  onClick={() => handleQuickAction(action.query)}
                   disabled={isLoading}
                 >
-                  {topic}
+                  {action.label}
+                  {action.id === 'drafts' && drafts.length > 0 && (
+                    <span className={styles.quickBadge}>{drafts.length}</span>
+                  )}
                 </button>
               ))}
             </div>
-          </>
-        )}
-
-        {messages.map(msg => (
-          <MessageBubble key={msg.id} message={msg} />
-        ))}
-
-        {isLoading && statusText && (
-          <div className={styles.status}>{statusText}</div>
-        )}
-
-        <div ref={messagesEndRef} />
-      </div>
-
-      <form className={styles.inputArea} onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder={isEscalated ? 'Сообщение оператору…' : 'Введите сообщение...'}
-          value={input}
-          onChange={e => setInput(e.target.value)}
-          disabled={isLoading}
-        />
-        {isLoading ? (
-          <button
-            type="button"
-            className={styles.stopBtn}
-            onClick={stopGeneration}
-            aria-label="Остановить генерацию"
-          >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <rect x="2" y="2" width="10" height="10" rx="1" fill="white" />
-            </svg>
-          </button>
-        ) : (
-          <button type="submit" className={styles.sendBtn} disabled={!input.trim()} aria-label="Отправить">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M18 2L9 11M18 2L12 18L9 11M18 2L2 8L9 11" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-        )}
-      </form>
+            <ChatInput
+              value={input}
+              onChange={setInput}
+              onSubmit={handleSubmit}
+              disabled={isLoading}
+              isLoading={isLoading}
+              onStop={stopGeneration}
+              placeholder={inputPlaceholder}
+              variant="chat"
+            />
+          </div>
+        </>
+      ) : (
+        <>
+          <div className={styles.welcomeScroll}>
+            <WelcomeScreen
+              onQueryClick={handleQueryClick}
+              onClose={() => setIsOpen(false)}
+              isLoading={isLoading}
+            />
+          </div>
+          <ChatInput
+            value={input}
+            onChange={setInput}
+            onSubmit={handleSubmit}
+            disabled={isLoading}
+            isLoading={isLoading}
+            onStop={stopGeneration}
+            placeholder={inputPlaceholder}
+            variant="welcome"
+          />
+        </>
+      )}
     </div>
   );
 };

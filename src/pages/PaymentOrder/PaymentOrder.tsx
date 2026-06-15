@@ -10,7 +10,7 @@ interface Props {
 }
 
 const PaymentOrder = ({ onClose }: Props) => {
-  const { fromDale, get, bind } = useFormPrefill('/payment-order');
+  const { fromDale, get, bind, values, clearFromDale } = useFormPrefill('/payment-order');
   const { trackField, saveNow, completeDraft } = useDraftTracker({
     draftType: 'payment_order',
     title: 'Платёжное поручение',
@@ -20,11 +20,11 @@ const PaymentOrder = ({ onClose }: Props) => {
   useEffect(() => {
     if (fromDale) {
       ['recipient', 'amount', 'purpose'].forEach(key => {
-        const val = get(key);
+        const val = values[key];
         if (val) trackField(key, val);
       });
     }
-  }, [fromDale, get, trackField]);
+  }, [fromDale, values, trackField]);
 
   const amountDefault = get('amount') || '0.00 BYN';
 
@@ -61,6 +61,7 @@ const PaymentOrder = ({ onClose }: Props) => {
               placeholder="Наименование контрагента или номер счета"
               {...bind('recipient')}
               onChange={e => {
+                clearFromDale();
                 bind('recipient').onChange(e);
                 trackField('recipient', e.target.value);
               }}
@@ -94,6 +95,7 @@ const PaymentOrder = ({ onClose }: Props) => {
               className={styles.amountInput}
               {...bind('amount', amountDefault)}
               onChange={e => {
+                clearFromDale();
                 bind('amount', amountDefault).onChange(e);
                 trackField('amount', e.target.value);
               }}
@@ -113,6 +115,7 @@ const PaymentOrder = ({ onClose }: Props) => {
               rows={4}
               {...bind('purpose')}
               onChange={e => {
+                clearFromDale();
                 bind('purpose').onChange(e);
                 trackField('purpose', e.target.value);
               }}

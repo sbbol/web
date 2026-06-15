@@ -25,7 +25,7 @@ import styles from './Statement.module.css';
 
 const Statement = () => {
   const [searchParams] = useSearchParams();
-  const { fromDale, get, setValues } = useFormPrefill('/statement');
+  const { fromDale, get, setValues, clearFromDale } = useFormPrefill('/statement');
 
   const { trackField, completeDraft } = useDraftTracker({
 
@@ -82,20 +82,20 @@ const Statement = () => {
 
 
   useEffect(() => {
-
     if (fromDale) {
-
       const p = get('period');
-
-      const a = get('account');
-
+      let a = get('account');
       if (p) { setPeriod(p); trackField('period', p); }
-
-      if (a) { setAccount(a); trackField('account', a); }
-
+      if (a) {
+        if (reference && !reference.accountOptions.some(o => o.key === a)) {
+          console.warn(`[Dale prefill] Account key "${a}" not found in options, falling back to "all"`);
+          a = 'all';
+        }
+        setAccount(a);
+        trackField('account', a);
+      }
     }
-
-  }, [fromDale, get, trackField]);
+  }, [fromDale, get, trackField, reference]);
 
 
 
@@ -106,23 +106,15 @@ const Statement = () => {
 
 
   const handleReset = () => {
-
     setAccount('all');
-
     setPeriod('today');
-
     setZeroTurnover(false);
-
     setDaily(false);
-
     setRevaluation(false);
-
     setResult(null);
-
     setError('');
-
     setValues({});
-
+    clearFromDale();
   };
 
 
@@ -256,7 +248,12 @@ const Statement = () => {
 
                     className={styles.dropdownItem}
 
-                    onClick={() => { setAccount(opt.key); setOpenDropdown(null); trackField('account', opt.key); }}
+                    onClick={() => {
+                      setAccount(opt.key);
+                      setOpenDropdown(null);
+                      trackField('account', opt.key);
+                      clearFromDale();
+                    }}
 
                   >
 
@@ -312,7 +309,12 @@ const Statement = () => {
 
                     className={styles.dropdownItem}
 
-                    onClick={() => { setPeriod(opt.key); setOpenDropdown(null); trackField('period', opt.key); }}
+                    onClick={() => {
+                      setPeriod(opt.key);
+                      setOpenDropdown(null);
+                      trackField('period', opt.key);
+                      clearFromDale();
+                    }}
 
                   >
 
@@ -344,7 +346,11 @@ const Statement = () => {
 
                 checked={zeroTurnover}
 
-                onChange={e => { setZeroTurnover(e.target.checked); trackField('zero_turnover', String(e.target.checked)); }}
+                onChange={e => {
+                  setZeroTurnover(e.target.checked);
+                  trackField('zero_turnover', String(e.target.checked));
+                  clearFromDale();
+                }}
 
               />
 
@@ -360,7 +366,11 @@ const Statement = () => {
 
                 checked={daily}
 
-                onChange={e => { setDaily(e.target.checked); trackField('daily', String(e.target.checked)); }}
+                onChange={e => {
+                  setDaily(e.target.checked);
+                  trackField('daily', String(e.target.checked));
+                  clearFromDale();
+                }}
 
               />
 
@@ -376,7 +386,11 @@ const Statement = () => {
 
                 checked={revaluation}
 
-                onChange={e => { setRevaluation(e.target.checked); trackField('revaluation', String(e.target.checked)); }}
+                onChange={e => {
+                  setRevaluation(e.target.checked);
+                  trackField('revaluation', String(e.target.checked));
+                  clearFromDale();
+                }}
 
               />
 

@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Modal from '../Modal';
 import NewEmployeeModal, { type EmployeePrefill } from '../NewEmployeeModal';
-import { consumePrefill } from '../../utils/deepLinks';
+import { consumePrefill, DALE_PREFILL_EVENT, type DalePrefillDetail } from '../../utils/deepLinks';
 import { deleteEmployee, fetchEmployees, type Employee } from '../../api/data';
 import styles from './EmployeesModal.module.css';
 
@@ -9,6 +9,8 @@ interface Props {
   onClose: () => void;
   autoOpenNew?: boolean;
 }
+
+const EMPLOYEES_ROUTE = '/other';
 
 const EmployeesModal = ({ onClose, autoOpenNew }: Props) => {
   const [tab, setTab] = useState<'all' | 'favorites'>('all');
@@ -18,6 +20,13 @@ const EmployeesModal = ({ onClose, autoOpenNew }: Props) => {
   const [newEmployeeOpen, setNewEmployeeOpen] = useState(false);
   const [employeePrefill, setEmployeePrefill] = useState<EmployeePrefill | undefined>();
   const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  const applyEmployeePrefill = useCallback((data: Record<string, string>) => {
+    if (Object.keys(data).length > 0) {
+      setEmployeePrefill(data as EmployeePrefill);
+      setNewEmployeeOpen(true);
+    }
+  }, []);
 
   const loadEmployees = async () => {
     setLoading(true);
@@ -35,14 +44,24 @@ const EmployeesModal = ({ onClose, autoOpenNew }: Props) => {
   }, []);
 
   useEffect(() => {
-    const data = consumePrefill('/other');
+    const data = consumePrefill(EMPLOYEES_ROUTE);
     if (data && Object.keys(data).length > 0) {
-      setEmployeePrefill(data as EmployeePrefill);
-      setNewEmployeeOpen(true);
+      applyEmployeePrefill(data);
     } else if (autoOpenNew) {
       setNewEmployeeOpen(true);
     }
-  }, [autoOpenNew]);
+  }, [autoOpenNew, applyEmployeePrefill]);
+
+  useEffect(() => {
+    const handler = (event: Event) => {
+      const detail = (event as CustomEvent<DalePrefillDetail>).detail;
+      if (detail?.route === EMPLOYEES_ROUTE) {
+        applyEmployeePrefill(detail.formData);
+      }
+    };
+    window.addEventListener(DALE_PREFILL_EVENT, handler);
+    return () => window.removeEventListener(DALE_PREFILL_EVENT, handler);
+  }, [applyEmployeePrefill]);
 
   const filtered = employees.filter(e =>
     e.fullName.toLowerCase().includes(search.toLowerCase()),

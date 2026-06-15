@@ -1,5 +1,6 @@
 import type { ChatMessage } from '../../types/chat';
 import ActionButton from './ActionButton';
+import avatarImage from '../../assets/floating-button-avatar.png';
 import styles from './MessageBubble.module.css';
 
 interface Props {
@@ -11,17 +12,21 @@ const MessageBubble = ({ message }: Props) => {
   const isOperator = message.role === 'operator';
 
   return (
-    <div className={`${styles.bubble} ${isUser ? styles.user : isOperator ? styles.operator : styles.assistant}`}>
+    <div className={`${styles.row} ${isUser ? styles.rowUser : styles.rowAssistant}`}>
       {!isUser && (
-        <span className={styles.name}>{isOperator ? 'Оператор банка' : 'Дэйл'}</span>
+        <img src={avatarImage} alt="" className={styles.avatar} aria-hidden />
       )}
-      <p className={styles.text}>
-        {message.content}
-        {message.isStreaming && <span className={styles.cursor}>▋</span>}
-      </p>
-      {message.actions?.map((action, i) => (
-        <ActionButton key={i} action={action} />
-      ))}
+      <div
+        className={`${styles.bubble} ${isUser ? styles.user : isOperator ? styles.operator : styles.assistant}`}
+      >
+        <p className={styles.text}>
+          {message.content}
+          {message.isStreaming && <span className={styles.cursor}>▋</span>}
+        </p>
+        {message.actions?.map((action, i) => (
+          <ActionButton key={i} action={action} />
+        ))}
+      </div>
     </div>
   );
 };

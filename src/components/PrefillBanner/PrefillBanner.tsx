@@ -12,7 +12,7 @@ const PrefillBanner = ({ visible }: Props) => {
         <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.2" />
         <path d="M8 5V9M8 11V11.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
       </svg>
-      Поля заполнены Дэйлом — проверьте данные перед отправкой
+      Поля заполнены Дейлом — проверьте данные перед отправкой
     </div>
   );
 };

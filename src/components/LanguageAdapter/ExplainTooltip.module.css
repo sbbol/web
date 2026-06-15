@@ -55,3 +55,20 @@
   margin: 0;
   color: var(--color-graphite-01);
 }
+
+.askBtn {
+  margin-top: 10px;
+  width: 100%;
+  padding: 7px 10px;
+  border: 1px solid var(--color-malachite-02);
+  border-radius: 6px;
+  background: white;
+  color: var(--color-malachite-02);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.askBtn:hover {
+  background: #f0fafb;
+}

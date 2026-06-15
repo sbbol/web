@@ -10,7 +10,7 @@ interface Props {
 }
 
 const InstantPayment = ({ onClose }: Props) => {
-  const { fromDale, get, bind } = useFormPrefill('/instant-payment');
+  const { fromDale, get, bind, values, clearFromDale } = useFormPrefill('/instant-payment');
   const { trackField, saveNow, completeDraft } = useDraftTracker({
     draftType: 'instant_payment',
     title: 'Мгновенный платёж',
@@ -20,11 +20,11 @@ const InstantPayment = ({ onClose }: Props) => {
   useEffect(() => {
     if (fromDale) {
       ['recipient', 'amount', 'purpose'].forEach(key => {
-        const val = get(key);
+        const val = values[key];
         if (val) trackField(key, val);
       });
     }
-  }, [fromDale, get, trackField]);
+  }, [fromDale, values, trackField]);
 
   const amountDefault = get('amount') || '0.00 BYN';
 
@@ -50,6 +50,7 @@ const InstantPayment = ({ onClose }: Props) => {
               placeholder="Наименование контрагента или номер счета"
               {...bind('recipient')}
               onChange={e => {
+                clearFromDale();
                 bind('recipient').onChange(e);
                 trackField('recipient', e.target.value);
               }}
@@ -84,6 +85,7 @@ const InstantPayment = ({ onClose }: Props) => {
               className={styles.amountInput}
               {...bind('amount', amountDefault)}
               onChange={e => {
+                clearFromDale();
                 bind('amount', amountDefault).onChange(e);
                 trackField('amount', e.target.value);
               }}
@@ -103,6 +105,7 @@ const InstantPayment = ({ onClose }: Props) => {
               rows={4}
               {...bind('purpose')}
               onChange={e => {
+                clearFromDale();
                 bind('purpose').onChange(e);
                 trackField('purpose', e.target.value);
               }}

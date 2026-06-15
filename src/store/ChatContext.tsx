@@ -9,6 +9,7 @@ import {
 } from 'react';
 
 import { streamChat, fetchDrafts, fetchChatHistory, deleteDraft } from '../api/chat';
+import { CHAT_GREETING } from '../components/Chat/chatConstants';
 import type { ChatAction, ChatMessage, Draft } from '../types/chat';
 
 const CONVERSATION_STORAGE_KEY = 'dale_conversation_id';
@@ -155,9 +156,13 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
       isStreaming: true,
     };
 
-    setMessages(prev => [...prev, userMsg, assistantMsg]);
+    setMessages(prev => {
+      const greetingMsg: ChatMessage | null =
+        prev.length === 0 ? { id: nextId(), role: 'assistant', content: CHAT_GREETING } : null;
+      return [...prev, ...(greetingMsg ? [greetingMsg] : []), userMsg, assistantMsg];
+    });
     setIsLoading(true);
-    setStatusText('Дэйл думает...');
+    setStatusText('Дейл думает...');
 
     try {
       let collectedActions: ChatAction[] = [];

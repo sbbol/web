@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import EmployeesModal from '../../components/EmployeesModal';
 import styles from './Other.module.css';
 
@@ -12,12 +12,19 @@ const otherItems = [
 const Other = () => {
   const [employeesOpen, setEmployeesOpen] = useState(false);
   const [searchParams] = useSearchParams();
+  const location = useLocation();
 
   useEffect(() => {
     if (searchParams.get('open') === 'employees') {
       setEmployeesOpen(true);
     }
   }, [searchParams]);
+
+  useEffect(() => {
+    if (location.state?.dalePrefill) {
+      setEmployeesOpen(true);
+    }
+  }, [location.state]);
 
   const autoOpenNew = searchParams.get('newEmployee') === 'true';
 

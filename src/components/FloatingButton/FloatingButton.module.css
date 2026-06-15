@@ -57,9 +57,10 @@
 
 .expandedWrap {
   position: fixed;
-  bottom: 40px;
-  right: calc(40px - (100vw - 100%));
+  top: 0;
+  right: 0;
   z-index: 9000;
-  width: 360px;
-  max-width: calc(100vw - 48px);
+  width: 408px;
+  max-width: 100vw;
+  height: 100vh;
 }
