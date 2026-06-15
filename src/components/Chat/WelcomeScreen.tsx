@@ -32,6 +32,9 @@ const WelcomeScreen = ({ onQueryClick, onClose, isLoading }: Props) => {
       <p className={styles.intro}>
         Быстро найду нужные функции и помогу с задачами вашего бизнеса.
       </p>
+      <p className={styles.queriesLabel}>
+        Вот что я умею:
+      </p>
 
       <div className={styles.cards}>
         {FEATURE_CARDS.map(card => {
@@ -48,14 +51,13 @@ const WelcomeScreen = ({ onQueryClick, onClose, isLoading }: Props) => {
                 <div className={styles.cardText}>
                   <span className={styles.cardTitle}>{card.title}</span>
                   <span className={styles.cardSubtitle}>{card.subtitle}</span>
-                  {isExpanded && !card.descriptionOutside && (
-                    <p className={styles.cardDescription}>{card.description}</p>
-                  )}
                 </div>
               </button>
-              {isExpanded && card.descriptionOutside && (
-                <p className={styles.cardDescriptionOutside}>{card.description}</p>
-              )}
+              <div className={`${styles.descriptionContainer} ${isExpanded ? styles.descriptionExpanded : ''}`}>
+                <div className={styles.descriptionInner}>
+                  <p className={styles.descriptionText}>{card.description}</p>
+                </div>
+              </div>
             </div>
           );
         })}

@@ -10,7 +10,7 @@ import iconClose from '../../assets/figma/icon-close.svg';
 import iconMenuVertical from '../../assets/figma/chat/icon-menu-vertical.svg';
 import styles from './ChatPanel.module.css';
 
-const OPERATOR_PANEL_URL = 'http://localhost:8000/operator.html';
+const OPERATOR_PANEL_URL = 'http://localhost:8000/operator';
 
 const ChatPanel = () => {
   const {
@@ -109,9 +109,6 @@ const ChatPanel = () => {
           {isEscalated && (
             <div className={styles.escalationBanner}>
               Диалог передан оператору — ожидайте ответа.
-              <a href={OPERATOR_PANEL_URL} target="_blank" rel="noopener noreferrer" className={styles.operatorLink}>
-                Панель оператора
-              </a>
             </div>
           )}
 

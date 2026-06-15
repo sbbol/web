@@ -72,3 +72,47 @@
 .askBtn:hover {
   background: #f0fafb;
 }
+
+
+/* Мини-кнопка, появляющаяся сразу при выделении */
+.miniButton {
+  position: fixed;
+  z-index: 10000;
+  transform: translate(-50%, -100%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: white;
+  border-radius: 20px;
+  padding: 4px 6px;
+  box-shadow: 0 2px 8px rgba(31, 31, 34, 0.18);
+  border: 1px solid var(--color-asphalt-03);
+}
+
+.miniAskBtn {
+  border: none;
+  background: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 2px;
+  line-height: 1;
+  transition: transform 0.1s;
+}
+
+.miniAskBtn:hover {
+  transform: scale(1.15);
+}
+
+.miniClose {
+  border: none;
+  background: none;
+  font-size: 16px;
+  color: #999;
+  cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+}
+
+.miniClose:hover {
+  color: #333;
+}

@@ -79,7 +79,7 @@
   background: #ffffff;
   text-align: left;
   cursor: pointer;
-  transition: box-shadow 0.15s;
+  transition: box-shadow 0.15s, border-radius 0.15s;
 }
 
 .card:hover {
@@ -87,6 +87,7 @@
 }
 
 .cardExpanded {
+  border-radius: 12px 12px 0 0;
   box-shadow: 0 2px 8px rgba(31, 31, 34, 0.08);
 }
 
@@ -116,19 +117,30 @@
   color: var(--color-asphalt-01);
 }
 
-.cardDescription {
-  margin: 8px 0 0;
-  font-size: 12px;
-  line-height: 16px;
-  color: var(--color-asphalt-01);
+/* Контейнер для выпадающего описания */
+.descriptionContainer {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
 }
 
-.cardDescriptionOutside {
-  margin: 6px 0 0;
-  padding: 0 4px;
+.descriptionExpanded {
+  max-height: 200px;
+  opacity: 1;
+}
+
+.descriptionInner {
+  background: #C4DFDD; /* Заданный фон */
+  border-radius: 0 0 12px 12px;
+  padding: 12px 14px;
+}
+
+.descriptionText {
+  margin: 0;
   font-size: 12px;
   line-height: 16px;
-  color: var(--color-asphalt-01);
+  color: #1F1F22; /* Темнее для контраста (graphite-01) */
 }
 
 .queries {
