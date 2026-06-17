@@ -1,73 +1,61 @@
-# React + TypeScript + Vite
+# СберБизнес — веб-клиент с AI-помощником Дейл
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React-приложение: интерфейс интернет-банка для юрлиц с встроенным чат-ассистентом, автозаполнением форм, объяснением терминов и черновиками документов.
 
-Currently, two official plugins are available:
+Связанные репозитории: backend (`server`), мобильное приложение (`sbolb_assistant_mobile`).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Стек
 
-## React Compiler
+- React 19 + TypeScript
+- Vite 8
+- React Router
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Требования
 
-## Expanding the ESLint configuration
+- Node.js 20+
+- Запущенный backend на `http://localhost:8000` (см. `server/README.md`)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Запуск
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cd sbolb_assistant_web
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Приложение откроется на http://localhost:5173. Запросы к `/api/*` проксируются на backend (см. `vite.config.ts`).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Скрипты
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Команда | Описание |
+|---------|----------|
+| `npm run dev` | Dev-сервер с HMR |
+| `npm run build` | Production-сборка в `dist/` |
+| `npm run preview` | Просмотр production-сборки |
+| `npm run lint` | ESLint |
+
+## Основные возможности
+
+- **Чат с Дейлом** — FAQ, навигация по разделам, подсказки по формам
+- **Автозаполнение** — платёжные поручения, выписки, сотрудники
+- **Объяснение терминов** — выделение текста на странице
+- **Черновики** — сохранение незавершённых документов
+- **Демо-разделы** — счета, карты, платежи, продукты, заявления
+
+## Структура
+
 ```
+src/
+  api/          # запросы к backend
+  components/   # UI-компоненты (чат, модалки, layout)
+  pages/        # страницы приложения
+  store/        # React-контексты (чат, черновики)
+  hooks/        # хуки (prefill, draft tracker)
+```
+
+## Конфигурация
+
+- API прокси: `vite.config.ts` → `http://localhost:8000`
+- Демо-пользователь: `src/api/config.ts` (`USER_ID = 'demo_user'`)
+
+Проект использует брендинг и шрифты СберБизнес в демонстрационных целях.
